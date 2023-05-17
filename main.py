@@ -1,47 +1,10 @@
-
-#Character Core
-class DnDCharacter():
-    def __init__(self, name, race, classtype, bg, align):
-        self.name = name
-        self.race = race
-        self.level = 1
-        self.HP = 1
-        self.AC = 0
-        self.classtype = classtype
-        self.set_class(classtype)
-        self.con = 2
-        self.bg = bg
-        self.align = align
-
-    # Delete Character:
-    def reset(self):
-        self.race = 'N/A'
-        self.classtype = 'N/A'
-        self.name = 'N/A'
-        self.level = 'N/A'
-        self.HP = 'N/A'
-        self.AC = 'N/A'
-        self.con = 'N/A'
-        self.bg = 'N/A'
-        self.align = 'N/A'
-
-    #Level 1 Health Calculations
-    def set_class(self, classtype):
-        if classtype.lower == 'barbarian':
-            self.HP = 12
-        elif classtype.lower in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock', 'artificer']:
-            self.HP = 8
-        elif classtype.lower in ['fighter', 'paladin', 'ranger']:
-            self.HP = 10
-        elif classtype.lower in ['sorcerer', 'wizard']:
-            self.HP = 6
-        else:
-            self.HP = 'N/A'
+from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDAlignment
 
 
 #Character Creation:
 def createcharacter():
-    race = input("What is your character's race? ")
+    race = input(f"What is your character's race? {[x.name for x in DnDRace]}")
+    race = DnDRace[race.title()]
     classtype = input("What is your character's class? ")
     name = input("What is your character's name? ")
     bg = input("What is your character's background? ")
@@ -52,11 +15,11 @@ def createcharacter():
 
 #View Character:
 def viewcharacter(character):
-    print(f'Race = {character.race}')
-    print(f'Class = {character.classtype}')
+    print(f'Race = {character.race.name}')
+    print(f'Class = {character.classtype.name if isinstance(character.classtype, DnDClass) else character.classtype}')
     print(f'Name = {character.name}')
     print(f'Background = {character.bg}')
-    print(f'Alignment = {character.align}')
+    print(f'Alignment = {character.align.name if isinstance(character.align, DnDAlignment) else character.align}')
     print(f'Level = {character.level}')
     print(f'HP = {character.HP}')
     print(f'AC = {character.AC}')
