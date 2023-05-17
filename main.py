@@ -29,11 +29,11 @@ class DnDCharacter():
     def set_class(self, classtype):
         if classtype.lower == 'barbarian':
             self.HP = 12
-        elif classtype.lower == 'bard' or 'cleric' or 'druid' or 'monk' or 'rogue' or 'warlock' or 'artificer':
+        elif classtype.lower in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock', 'artificer']:
             self.HP = 8
-        elif classtype.lower == 'fighter' or 'paladin' or 'ranger':
+        elif classtype.lower in ['fighter', 'paladin', 'ranger']:
             self.HP = 10
-        elif classtype.lower == 'sorcerer' or 'wizard':
+        elif classtype.lower in ['sorcerer', 'wizard']:
             self.HP = 6
         else:
             self.HP = 'N/A'
