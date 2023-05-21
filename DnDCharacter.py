@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-
+#Race names
 class DnDRace(Enum):
     Dwarf = auto()
     Elf = auto()
@@ -12,7 +12,7 @@ class DnDRace(Enum):
     Half_Orc = auto()
     Tiefling = auto()
 
-
+#Class Names
 class DnDClass(Enum):
     Artificer = auto()
     Barbarian = auto()
@@ -28,7 +28,23 @@ class DnDClass(Enum):
     Warlock = auto()
     Wizard = auto()
 
+#Background Names
+class DnDBackground(Enum):
+    Acolyte = auto()
+    Charlatan = auto()
+    Criminal = auto()
+    Entertainer = auto()
+    Folk_Hero = auto()
+    Guild_Artisan = auto()
+    Hermit = auto()
+    Noble = auto()
+    Outlander = auto()
+    Sage = auto()
+    Sailor = auto()
+    Soldier = auto()
+    Urchin = auto()
 
+#Alignment Names
 class DnDAlignment(Enum):
     Lawful_Good = auto()
     Neutral_Good = auto()
@@ -40,7 +56,7 @@ class DnDAlignment(Enum):
     Neutral_Evil = auto()
     Chaotic_Evil = auto()
 
-
+#Viewing Race
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
         return race
@@ -51,7 +67,7 @@ def convert_to_dnd_race(race):
 
     return None
 
-
+#Viewing Class
 def convert_to_dnd_class(classtype):
     if isinstance(classtype, DnDClass):
         return classtype
@@ -62,7 +78,18 @@ def convert_to_dnd_class(classtype):
 
     return None
 
+#Viewing Background
+def convert_to_dnd_background(background):
+    if isinstance(background, DnDBackground):
+        return background
+    elif isinstance(background, int) and background in DnDBackground._value2member_map_:
+        return DnDBackground(background)
+    elif isinstance(background, str) and background.title() in DnDBackground._member_names_:
+        return DnDBackground[background.title()]
 
+    return None
+
+#Viewing Alignment
 def convert_to_dnd_alignment(alignment):
     if isinstance(alignment, DnDAlignment):
         return alignment
@@ -109,7 +136,7 @@ def convert_to_dnd_alignment(alignment):
 # Character Core
 class DnDCharacter:
     def __init__(
-        self, name: str, race: DnDRace, classtype: DnDClass, bg, align: DnDAlignment
+        self, name: str, race: DnDRace, classtype: DnDClass, background, align: DnDAlignment
     ):
         self.name = name
         self.race = race
@@ -119,7 +146,7 @@ class DnDCharacter:
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
-        self.bg = bg
+        self.background = background
         self.align = align
 
     # Delete Character:
@@ -131,7 +158,7 @@ class DnDCharacter:
         self.HP = "N/A"
         self.AC = "N/A"
         self.con = "N/A"
-        self.bg = "N/A"
+        self.background = "N/A"
         self.align = "N/A"
 
     # Level 1 Health Calculations

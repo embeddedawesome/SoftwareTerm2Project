@@ -1,4 +1,4 @@
-from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDAlignment, convert_to_dnd_race, convert_to_dnd_class, convert_to_dnd_alignment
+from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDBackground, DnDAlignment, convert_to_dnd_race, convert_to_dnd_background, convert_to_dnd_class, convert_to_dnd_alignment
 
 
 # Character Creation:
@@ -8,10 +8,11 @@ def createcharacter():
     classtype = input(f"What is your character's class? {DnDClass._member_names_}\n")
     classtype = convert_to_dnd_class(classtype)
     name = input("What is your character's name?\n")
-    bg = input("What is your character's background?\n")
+    background = input(f"What is your character's background? {DnDBackground._member_names_}\n")
+    background = convert_to_dnd_background(background)
     align = input("What is your character's alignment (eg. CN, LG...)?\n")
     align = convert_to_dnd_alignment(align)
-    character = DnDCharacter(name, race, classtype, bg, align)
+    character = DnDCharacter(name, race, classtype, background, align)
     return character
 
 
@@ -20,7 +21,7 @@ def viewcharacter(character):
     print(f"Race = {character.race.name}")
     print(f"Class = {character.classtype.name}")
     print(f"Name = {character.name}")
-    print(f"Background = {character.bg}")
+    print(f"Background = {character.background.name}")
     print(f"Alignment = {character.align.name}")
     print(f"Level = {character.level}")
     print(f"HP = {character.HP}")
