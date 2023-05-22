@@ -19,6 +19,7 @@ def createcharacter():
 # View Character:
 def viewcharacter(character):
     print(f"Race = {character.race.name}")
+    print(f'Size = {character.size}')
     print(f"Class = {character.classtype.name}")
     print(f"Name = {character.name}")
     print(f"Background = {character.background.name}")

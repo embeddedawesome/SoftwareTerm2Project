@@ -139,7 +139,7 @@ class DnDCharacter:
         self, name: str, race: DnDRace, classtype: DnDClass, background, align: DnDAlignment
     ):
         self.name = name
-        self.race = race
+        self.race = None
         self.level = 1
         self.HP = 1
         self.AC = 0
@@ -148,6 +148,7 @@ class DnDCharacter:
         self.con = 2
         self.background = background
         self.align = align
+        self.set_size(race)
 
     # Delete Character:
     def reset(self):
@@ -160,6 +161,7 @@ class DnDCharacter:
         self.con = "N/A"
         self.background = "N/A"
         self.align = "N/A"
+        self.size = "N/A"
 
     # Level 1 Health Calculations
     def set_class(self, classtype: DnDClass):
@@ -186,3 +188,28 @@ class DnDCharacter:
             self.HP = 6
         else:
             self.HP = "N/A"
+
+    #Determining Size
+    def set_size(self, race: DnDRace):
+        if not isinstance(race, DnDRace):
+            raise ValueError("Race is not a DnDRace")
+        if self.race is not None:
+            raise ValueError("Can only set race once")
+        self.race = race
+        if race in [
+            DnDRace.Dwarf,
+            DnDRace.Elf,
+            DnDRace.Human,
+            DnDRace.Dragonborn,
+            DnDRace.Half_Elf,
+            DnDRace.Half_Orc,
+            DnDRace.Tiefling
+        ]:
+            self.size = 'Medium'
+        elif race in [
+            DnDRace.Halfling,
+            DnDRace.Gnome
+        ]:
+            self.size = 'Small'
+        else:
+            self.size = "N/A"
