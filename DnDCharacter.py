@@ -218,11 +218,6 @@ class DnDCharacter:
 
     #Determining Speed
     def set_speed(self, race: DnDRace):
-        if not isinstance(race, DnDRace):
-            raise ValueError("Race is not a DnDRace")
-        if self.race is not None:
-            raise ValueError("Can only set race once")
-        self.race = race
         if race in [
             DnDRace.Elf,
             DnDRace.Human,
