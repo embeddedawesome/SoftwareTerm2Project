@@ -149,6 +149,7 @@ class DnDCharacter:
         self.background = background
         self.align = align
         self.set_size(race)
+        self.set_speed(race)
 
     # Delete Character:
     def reset(self):
@@ -162,6 +163,7 @@ class DnDCharacter:
         self.background = "N/A"
         self.align = "N/A"
         self.size = "N/A"
+        self.speed = "N/A"
 
     # Level 1 Health Calculations
     def set_class(self, classtype: DnDClass):
@@ -213,3 +215,28 @@ class DnDCharacter:
             self.size = 'Small'
         else:
             self.size = "N/A"
+
+    #Determining Speed
+    def set_speed(self, race: DnDRace):
+        if not isinstance(race, DnDRace):
+            raise ValueError("Race is not a DnDRace")
+        if self.race is not None:
+            raise ValueError("Can only set race once")
+        self.race = race
+        if race in [
+            DnDRace.Elf,
+            DnDRace.Human,
+            DnDRace.Dragonborn,
+            DnDRace.Half_Elf,
+            DnDRace.Half_Orc,
+            DnDRace.Tiefling
+        ]:
+            self.speed = '30ft'
+        elif race in [
+            DnDRace.Halfling,
+            DnDRace.Gnome,
+            DnDRace.Dwarf
+        ]:
+            self.speed = '25ft'
+        else:
+            self.speed = "N/A"

@@ -1,4 +1,4 @@
-from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDBackground, DnDAlignment, convert_to_dnd_race, convert_to_dnd_background, convert_to_dnd_class, convert_to_dnd_alignment
+from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDBackground, convert_to_dnd_race, convert_to_dnd_background, convert_to_dnd_class, convert_to_dnd_alignment
 
 
 # Character Creation:
@@ -20,6 +20,7 @@ def createcharacter():
 def viewcharacter(character):
     print(f"Race = {character.race.name}")
     print(f'Size = {character.size}')
+    print(f'Speed = {character.speed}')
     print(f"Class = {character.classtype.name}")
     print(f"Name = {character.name}")
     print(f"Background = {character.background.name}")
