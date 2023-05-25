@@ -84,8 +84,8 @@ def convert_to_dnd_background(background):
         return background
     elif isinstance(background, int) and background in DnDBackground._value2member_map_:
         return DnDBackground(background)
-    elif isinstance(background, str) and background.title() in DnDBackground._member_names_:
-        return DnDBackground[background.title()]
+    elif isinstance(background, str) and background.title().replace(" ", "_") in DnDBackground._member_names_:
+        return DnDBackground[background.title().replace(" ", "_")]
 
     return None
 
@@ -146,10 +146,11 @@ class DnDCharacter:
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
-        self.background = background
+        self.background = None
         self.align = align
         self.set_size(race)
         self.set_speed(race)
+        self.set_language(race, classtype, background)
 
     # Delete Character:
     def reset(self):
@@ -164,6 +165,7 @@ class DnDCharacter:
         self.align = "N/A"
         self.size = "N/A"
         self.speed = "N/A"
+        self.languages = "N/A"
 
     # Level 1 Health Calculations
     def set_class(self, classtype: DnDClass):
@@ -235,3 +237,14 @@ class DnDCharacter:
             self.speed = '25ft'
         else:
             self.speed = "N/A"
+
+    #Determining Languages
+    def set_language(self, race: DnDRace, classtype: DnDClass, background: DnDBackground):
+        if not isinstance(background, DnDBackground):
+            raise ValueError("Background is not a DnDBackground")
+        if self.background is not None:
+            raise ValueError("Can only set background once")
+        self.background = background
+        self.languages = ['Common']
+        if race == DnDRace.Tiefling:
+            self.languages.append('Infernal')

@@ -29,6 +29,7 @@ def viewcharacter(character):
     print(f"HP = {character.HP}")
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
+    print(f'Languages = {character.languages}')
 
 
 # Run Project
