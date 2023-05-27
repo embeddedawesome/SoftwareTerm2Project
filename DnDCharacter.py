@@ -56,6 +56,70 @@ class DnDAlignment(Enum):
     Neutral_Evil = auto()
     Chaotic_Evil = auto()
 
+#Language Names
+class DnDLanguages(Enum):
+    Commom = auto()
+    Dwarvish = auto()
+    Elvish = auto()
+    Giant = auto()
+    Gnomish = auto()
+    Goblin = auto()
+    Halfling = auto()
+    Orc = auto()
+    Abyssal = auto()
+    Deep_Speech = auto()
+    Draconic = auto()
+    Infernal = auto()
+
+#Simple Weapons
+class DnDSimpleWeapons(Enum):
+    Club = auto()
+    Dagger = auto()
+    Greatclub = auto()
+    Handaxe = auto()
+    Javelin = auto()
+    Light_hammer = auto()
+    Mace = auto()
+    Quarterstaff = auto()
+    Sickle = auto()
+    Spear = auto()
+
+#Simple Ranged Weapons
+class DnDSimpleRangedWeapons(Enum):
+    Light_crossbow = auto()
+    Dart = auto()
+    Shortbow = auto()
+    Sling = auto()
+
+#Martial Weapons
+class DnDMartialWeapons(Enum):
+    Battleaxe = auto()
+    Flail = auto()
+    Glaive = auto()
+    Greataxe = auto()
+    Greatsword = auto()
+    Halberd = auto()
+    Lance = auto()
+    Longsword = auto()
+    Maul = auto()
+    Morningstar = auto()
+    Pike = auto()
+    Rapier = auto()
+    Scimitar = auto()
+    Shortsword = auto()
+    Trident = auto()
+    War_pick = auto()
+    Warhammer = auto()
+    Whip = auto()
+
+#Martial Ranged Weapons
+class DnDMartialRangedWeapons(Enum):
+    Blowgun = auto()
+    Heavy_crossbow = auto()
+    Hand_crossbow = auto()
+    Longbow = auto()
+    Net = auto()
+
 #Viewing Race
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
@@ -167,15 +231,19 @@ class DnDCharacter:
         self.speed = "N/A"
         self.languages = "N/A"
 
-    # Level 1 Health Calculations
+    # Class Conditions
     def set_class(self, classtype: DnDClass):
         if not isinstance(classtype, DnDClass):
             raise ValueError("Class is not a DnDClass")
         if self.classtype is not None:
             raise ValueError("Can only set class once")
         self.classtype = classtype
+
+        #Barbarian Conditions
         if classtype == DnDClass.Barbarian:
             self.HP = 12
+            self.prof_bonus = 2
+
         elif classtype in [
             DnDClass.Bard,
             DnDClass.Cleric,
@@ -245,6 +313,16 @@ class DnDCharacter:
         if self.background is not None:
             raise ValueError("Can only set background once")
         self.background = background
-        self.languages = ['Common']
+        self.languages = DnDLanguages.Common
         if race == DnDRace.Tiefling:
-            self.languages.append('Infernal')
+            self.languages.appendDnDLanguages.Infernal
+
+    def set_race(self, race: DnDRace):
+        match race:
+            case DnDRace.Tiefling:
+                self.speed = 0
+                self.size = 0
+            case DnDRace.Half_Orc:
+                self.speed = 0
+                self.size = 0
+            case DnDRace.Half_Elf:
