@@ -212,9 +212,6 @@ class DnDCharacter:
         self.con = 2
         self.background = None
         self.align = align
-        self.set_size(race)
-        self.set_speed(race)
-        self.set_language(race, classtype, background)
 
     # Delete Character:
     def reset(self):
@@ -261,68 +258,33 @@ class DnDCharacter:
         else:
             self.HP = "N/A"
 
-    #Determining Size
-    def set_size(self, race: DnDRace):
-        if not isinstance(race, DnDRace):
-            raise ValueError("Race is not a DnDRace")
-        if self.race is not None:
-            raise ValueError("Can only set race once")
-        self.race = race
-        if race in [
-            DnDRace.Dwarf,
-            DnDRace.Elf,
-            DnDRace.Human,
-            DnDRace.Dragonborn,
-            DnDRace.Half_Elf,
-            DnDRace.Half_Orc,
-            DnDRace.Tiefling
-        ]:
-            self.size = 'Medium'
-        elif race in [
-            DnDRace.Halfling,
-            DnDRace.Gnome
-        ]:
-            self.size = 'Small'
-        else:
-            self.size = "N/A"
-
-    #Determining Speed
-    def set_speed(self, race: DnDRace):
-        if race in [
-            DnDRace.Elf,
-            DnDRace.Human,
-            DnDRace.Dragonborn,
-            DnDRace.Half_Elf,
-            DnDRace.Half_Orc,
-            DnDRace.Tiefling
-        ]:
-            self.speed = '30ft'
-        elif race in [
-            DnDRace.Halfling,
-            DnDRace.Gnome,
-            DnDRace.Dwarf
-        ]:
-            self.speed = '25ft'
-        else:
-            self.speed = "N/A"
-
-    #Determining Languages
-    def set_language(self, race: DnDRace, classtype: DnDClass, background: DnDBackground):
-        if not isinstance(background, DnDBackground):
-            raise ValueError("Background is not a DnDBackground")
-        if self.background is not None:
-            raise ValueError("Can only set background once")
-        self.background = background
-        self.languages = DnDLanguages.Common
-        if race == DnDRace.Tiefling:
-            self.languages.appendDnDLanguages.Infernal
-
+    #Race Conditions
     def set_race(self, race: DnDRace):
         match race:
             case DnDRace.Tiefling:
-                self.speed = 0
-                self.size = 0
+                self.speed = '30ft'
+                self.size = 'Medium'
             case DnDRace.Half_Orc:
-                self.speed = 0
-                self.size = 0
+                self.speed = '30ft'
+                self.size = 'Medium'
             case DnDRace.Half_Elf:
+                self.speed = '30ft'
+                self.size = 'Medium'
+            case DnDRace.Dragonborn:
+                self.speed = '30ft'
+                self.size = 'Medium'
+            case DnDRace.Dwarf:
+                self.speed = '25ft'
+                self.size = 'Medium'
+            case DnDRace.Elf:
+                self.speed = '30ft'
+                self.size = 'Medium'
+            case DnDRace.Gnome:
+                self.speed = '25ft'
+                self.size = 'Small'
+            case DnDRace.Halfling:
+                self.speed = '25ft'
+                self.size = 'Small'
+            case DnDRace.Human:
+                self.speed = '30ft'
+                self.size = 'Medium'
