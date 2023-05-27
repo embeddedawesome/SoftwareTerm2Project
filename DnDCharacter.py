@@ -58,7 +58,7 @@ class DnDAlignment(Enum):
 
 #Language Names
 class DnDLanguages(Enum):
-    Commom = auto()
+    Common = auto()
     Dwarvish = auto()
     Elvish = auto()
     Giant = auto()
@@ -203,15 +203,16 @@ class DnDCharacter:
         self, name: str, race: DnDRace, classtype: DnDClass, background, align: DnDAlignment
     ):
         self.name = name
-        self.race = None
+        self.race = race
         self.level = 1
         self.HP = 1
         self.AC = 0
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
-        self.background = None
+        self.background = background
         self.align = align
+        self.set_race(race)
 
     # Delete Character:
     def reset(self):
@@ -235,56 +236,123 @@ class DnDCharacter:
         if self.classtype is not None:
             raise ValueError("Can only set class once")
         self.classtype = classtype
+        match classtype:
 
-        #Barbarian Conditions
-        if classtype == DnDClass.Barbarian:
-            self.HP = 12
-            self.prof_bonus = 2
+            #Barbarian Conditions
+            case DnDClass.Barbarian:
+                self.HP = 12
+                self.prof_bonus = 2
 
-        elif classtype in [
-            DnDClass.Bard,
-            DnDClass.Cleric,
-            DnDClass.Druid,
-            DnDClass.Monk,
-            DnDClass.Rogue,
-            DnDClass.Warlock,
-            DnDClass.Artificer,
-        ]:
-            self.HP = 8
-        elif classtype in [DnDClass.Fighter, DnDClass.Paladin, DnDClass.Ranger]:
-            self.HP = 10
-        elif classtype in [DnDClass.Sorcerer, DnDClass.Wizard]:
-            self.HP = 6
-        else:
-            self.HP = "N/A"
+            #Bard Conditions
+            case DnDClass.Bard:
+                self.HP = 8
+
+            #Cleric Conditions
+            case DnDClass.Cleric:
+                self.HP = 8
+
+            #Druid Conditions
+            case DnDClass.Druid:
+                self.HP = 8
+
+            #Monk Conditions
+            case DnDClass.Monk:
+                self.HP = 8
+
+            #Rogue Conditions
+            case DnDClass.Rogue:
+                self.HP = 8
+
+            #Warlock Conditions
+            case DnDClass.Warlock:
+                self.HP = 8
+
+            #Artificer Conditions
+            case DnDClass.Artificer:
+                self.HP = 8
+
+            #Fighter Conditions
+            case DnDClass.Fighter:
+                self.HP = 10
+
+            #Paladin Conditions
+            case DnDClass.Paladin:
+                self.HP = 10
+
+            #Ranger Conditions
+            case DnDClass.Ranger:
+                self.HP = 10
+
+            #Sorcerer Conditions
+            case DnDClass.Sorcerer:
+                self.HP = 6
+
+            #Wizard Conditions
+            case DnDClass.Wizard:
+                self.HP = 6
 
     #Race Conditions
     def set_race(self, race: DnDRace):
         match race:
+
+            #Tiefling Conditions
             case DnDRace.Tiefling:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Infernal)
+
+            #Half Orc Conditions
             case DnDRace.Half_Orc:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Orc)
+
+            #Half Elf Conditions
             case DnDRace.Half_Elf:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Elvish)
+
+            #Dragonborn Conditions
             case DnDRace.Dragonborn:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Draconic)
+
+            #Dwarf Conditions
             case DnDRace.Dwarf:
                 self.speed = '25ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Dwarvish)
+
+            #Elf Conditions
             case DnDRace.Elf:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Elvish)
+
+            #Gnome Conditions
             case DnDRace.Gnome:
                 self.speed = '25ft'
                 self.size = 'Small'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Gnomish)
+
+            #Halfling Conditions
             case DnDRace.Halfling:
                 self.speed = '25ft'
                 self.size = 'Small'
+                self.languages.append(DnDLanguages.Common)
+                self.languages.append(DnDLanguages.Halfling)
+
+            #Human Conditions
             case DnDRace.Human:
                 self.speed = '30ft'
                 self.size = 'Medium'
+                self.languages.append(DnDLanguages.Common)
