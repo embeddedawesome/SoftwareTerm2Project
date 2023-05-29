@@ -27,6 +27,7 @@ def viewcharacter(character):
     print(f"Alignment = {character.align.name}")
     print(f"Level = {character.level}")
     print(f"HP = {character.HP}")
+    print(f"Proficiency Bonus = {character.prof_bonus}")
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
     print(f'Languages = {character.languages}')

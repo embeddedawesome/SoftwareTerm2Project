@@ -246,50 +246,62 @@ class DnDCharacter:
             #Bard Conditions
             case DnDClass.Bard:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Cleric Conditions
             case DnDClass.Cleric:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Druid Conditions
             case DnDClass.Druid:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Monk Conditions
             case DnDClass.Monk:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Rogue Conditions
             case DnDClass.Rogue:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Warlock Conditions
             case DnDClass.Warlock:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Artificer Conditions
             case DnDClass.Artificer:
                 self.HP = 8
+                self.prof_bonus = 2
 
             #Fighter Conditions
             case DnDClass.Fighter:
                 self.HP = 10
+                self.prof_bonus = 2
 
             #Paladin Conditions
             case DnDClass.Paladin:
                 self.HP = 10
+                self.prof_bonus = 2
 
             #Ranger Conditions
             case DnDClass.Ranger:
                 self.HP = 10
+                self.prof_bonus = 2
 
             #Sorcerer Conditions
             case DnDClass.Sorcerer:
                 self.HP = 6
+                self.prof_bonus = 2
 
             #Wizard Conditions
             case DnDClass.Wizard:
                 self.HP = 6
+                self.prof_bonus = 2
 
     #Race Conditions
     def set_race(self, race: DnDRace):
