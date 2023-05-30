@@ -120,6 +120,15 @@ class DnDMartialRangedWeapons(Enum):
     Longbow = auto()
     Net = auto()
 
+class DnDProficiencies(Enum):
+    Light_Armour = auto()
+    Medium_Armour = auto()
+    Shields = auto()
+    Simple_Weapons = auto()
+    Martial_Weapons = auto()
+    Strength = auto()
+    Constitution = auto()
+
 #Viewing Race
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
@@ -207,6 +216,7 @@ class DnDCharacter:
         self.level = 1
         self.HP = 1
         self.AC = 0
+        self.languages = []
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
@@ -228,6 +238,7 @@ class DnDCharacter:
         self.size = "N/A"
         self.speed = "N/A"
         self.languages = "N/A"
+        self.proficiencies = "N/A"
 
     # Class Conditions
     def set_class(self, classtype: DnDClass):
@@ -242,6 +253,12 @@ class DnDCharacter:
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDProficiencies.Light_Armour)
+                #choice1 = input('Would you like a greataxe or a different martial melee weapon? ')
+                #if choice1 == 'greataxe':
+                #   self.weapons.append(DnDMartialWeapons.Greataxe)
+                #elif choice1 == 'different martial melee weapon':
+                #    self.weapons.append(DnDMartialWeapons.(input('Which weapon? '))
 
             #Bard Conditions
             case DnDClass.Bard:

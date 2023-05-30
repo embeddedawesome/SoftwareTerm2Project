@@ -27,10 +27,11 @@ def viewcharacter(character):
     print(f"Alignment = {character.align.name}")
     print(f"Level = {character.level}")
     print(f"HP = {character.HP}")
-    print(f"Proficiency Bonus = {character.prof_bonus}")
+    print(f"Proficiency Bonus = +{character.prof_bonus}")
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
-    print(f'Languages = {character.languages}')
+    print(f'Languages = {[l.name for l in character.languages]}')
+    print(f'Proficiencies = {[l.name for l in character.proficiencies]}')
 
 
 # Run Project
