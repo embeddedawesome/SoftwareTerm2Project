@@ -129,6 +129,64 @@ class DnDProficiencies(Enum):
     Strength = auto()
     Constitution = auto()
 
+class DnDArtisanTools(Enum):
+    Alchemist_supplies = auto()
+    Brewers_supplies = auto()
+    Calligraphers_supplies = auto()
+    Carpenters_tools = auto()
+    Cartographers_tools = auto()
+    Cobblers_tools = auto()
+    Cooks_utensils = auto()
+    Glassblowers_tools = auto()
+    Jewelers_tools = auto()
+    Leatherworkers_tools = auto()
+    Masons_tools = auto()
+    Painters_supplies = auto()
+    Potters_tools = auto()
+    Smiths_tools = auto()
+    Tinkers_tools = auto()
+    Weavers_tools = auto()
+    Woodcarvers_tools = auto()
+
+class DnDGamingSets(Enum):
+    Dice_set = auto()
+    Dragonchess_set = auto()
+    Playing_card_set = auto()
+    Three_Dragon_Ante_set = auto()
+
+class DnDMusicalInstruments(Enum):
+    Bagpipes = auto()
+    Drum = auto()
+    Dulcimer = auto()
+    Flute = auto()
+    Lute = auto()
+    Lyre = auto()
+    Horn = auto()
+    Pan_flute = auto()
+    Shawm = auto()
+    Viol = auto()
+
+class DnDMiscTools(Enum):
+    Disguise_kit = auto()
+    Forgery_kit = auto()
+    Herbalism_kit = auto()
+    Navigators_tools = auto()
+    Poisoners_kit = auto()
+    Thieves_tools = auto()
+
+class DnDLightArmour(Enum):
+    Padded_armour = auto()
+    Leather_armour = auto()
+    Studded_leather_armour = auto()
+
+class DnDMediumArmour(Enum):
+    Hide_armour = auto()
+    Chain_shirt = auto()
+    Scale_mail_armour = auto()
+    Spiked_armour = auto()
+    Breastplate = auto()
+    Halfplate = auto()
+
 #Viewing Race
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
@@ -254,6 +312,8 @@ class DnDCharacter:
                 self.HP = 12
                 self.prof_bonus = 2
                 self.proficiencies.append(DnDProficiencies.Light_Armour)
+                self.proficiencies.append(DnDProficiencies.Medium_Armour)
+                self.proficiencies.append(DnDProficiencies.Medium_Armour)
                 #choice1 = input('Would you like a greataxe or a different martial melee weapon? ')
                 #if choice1 == 'greataxe':
                 #   self.weapons.append(DnDMartialWeapons.Greataxe)
