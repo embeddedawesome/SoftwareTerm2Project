@@ -121,13 +121,13 @@ class DnDMartialRangedWeapons(Enum):
     Net = auto()
 
 class DnDProficiencies(Enum):
-    Light_Armour = auto()
-    Medium_Armour = auto()
     Shields = auto()
-    Simple_Weapons = auto()
-    Martial_Weapons = auto()
     Strength = auto()
+    Dexterity = auto()
     Constitution = auto()
+    Intelligence = auto()
+    Wisdom = auto()
+    Charisma = auto()
 
 class DnDArtisanTools(Enum):
     Alchemist_supplies = auto()
@@ -186,6 +186,41 @@ class DnDMediumArmour(Enum):
     Spiked_armour = auto()
     Breastplate = auto()
     Halfplate = auto()
+
+class DnDHeavyArmour(Enum):
+    Ring_mail_armour = auto()
+    Chain_mail_armour = auto()
+    Splint_armour = auto()
+    Plate_armour = auto()
+
+class DnDEquipmentPacks(Enum):
+    Burglars_pack = auto()
+    Diplomats_pack = auto()
+    Dungeoneers_pack = auto()
+    Entertainers_pack = auto()
+    Explorers_pack = auto()
+    Priests_pack = auto()
+    Scholars_pack = auto()
+
+class DnDSkills(Enum):
+    Acrobatics = auto()
+    Animal_handling = auto()
+    Arcana = auto()
+    Athletics = auto()
+    Deception = auto()
+    History = auto()
+    Insight = auto()
+    Intimidation = auto()
+    Investigation = auto()
+    Medicine = auto()
+    Nature = auto()
+    Perception = auto()
+    Performance = auto()
+    Persuasion = auto()
+    Religion = auto()
+    Sleight_of_hand = auto()
+    Stealth = auto()
+    Survival = auto()
 
 #Viewing Race
 def convert_to_dnd_race(race):
@@ -275,6 +310,7 @@ class DnDCharacter:
         self.HP = 1
         self.AC = 0
         self.languages = []
+        self.proficiencies = []
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
@@ -311,9 +347,15 @@ class DnDCharacter:
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
-                self.proficiencies.append(DnDProficiencies.Light_Armour)
-                self.proficiencies.append(DnDProficiencies.Medium_Armour)
-                self.proficiencies.append(DnDProficiencies.Medium_Armour)
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                #Shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialWeapons)
+                self.proficiencies.append(DnDProficiencies.Strength)
+                self.proficiencies.append(DnDProficiencies.Constitution)
+                #choose 2 from list
+
                 #choice1 = input('Would you like a greataxe or a different martial melee weapon? ')
                 #if choice1 == 'greataxe':
                 #   self.weapons.append(DnDMartialWeapons.Greataxe)
@@ -324,61 +366,168 @@ class DnDCharacter:
             case DnDClass.Bard:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialRangedWeapons.Hand_crossbow)
+                self.proficiencies.append(DnDMartialWeapons.Longsword)
+                self.proficiencies.append(DnDMartialWeapons.Rapier)
+                self.proficiencies.append(DnDMartialWeapons.Shortsword)
+                #3 musical instruments of your choice
+                self.proficiencies.append(DnDProficiencies.Dexterity)
+                self.proficiencies.append(DnDProficiencies.Charisma)
+                #any 3 skills
 
             #Cleric Conditions
             case DnDClass.Cleric:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                #shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDProficiencies.Wisdom)
+                self.proficiencies.append(DnDProficiencies.Charisma)
+                #2 skills from list
 
             #Druid Conditions
             case DnDClass.Druid:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                #shields (no armour made of metal)
+                self.proficiencies.append(DnDSimpleWeapons.Club)
+                self.proficiencies.append(DnDSimpleWeapons.Dagger)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Dart)
+                self.proficiencies.append(DnDSimpleWeapons.Javelin)
+                self.proficiencies.append(DnDSimpleWeapons.Mace)
+                self.proficiencies.append(DnDSimpleWeapons.Quarterstaff)
+                self.proficiencies.append(DnDMartialWeapons.Scimitar)
+                self.proficiencies.append(DnDSimpleWeapons.Sickle)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Sling)
+                self.proficiencies.append(DnDSimpleWeapons.Spear)
+                self.proficiencies.append(DnDMiscTools.Herbalism_kit)
+                self.proficiencies.append(DnDProficiencies.Intelligence)
+                self.proficiencies.append(DnDProficiencies.Wisdom)
+                #2 skills from list
 
             #Monk Conditions
             case DnDClass.Monk:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialWeapons.Shortsword)
+                #1 artisan tool or musical instrument
+                self.proficiencies.append(DnDProficiencies.Strength)
+                self.proficiencies.append(DnDProficiencies.Dexterity)
+                #2 skills from list
 
             #Rogue Conditions
             case DnDClass.Rogue:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialRangedWeapons.Hand_crossbow)
+                self.proficiencies.append(DnDMartialWeapons.Longsword)
+                self.proficiencies.append(DnDMartialWeapons.Rapier)
+                self.proficiencies.append(DnDMartialWeapons.Shortsword)
+                self.proficiencies.append(DnDMiscTools.Thieves_tools)
+                self.proficiencies.append(DnDProficiencies.Dexterity)
+                self.proficiencies.append(DnDProficiencies.Intelligence)
+                #4 skills from list
 
             #Warlock Conditions
             case DnDClass.Warlock:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDProficiencies.Wisdom)
+                self.proficiencies.append(DnDProficiencies.Charisma)
+                #2 skills from list
 
             #Artificer Conditions
             case DnDClass.Artificer:
                 self.HP = 8
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                #Shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMiscTools.Thieves_tools)
+                self.proficiencies.append(DnDArtisanTools.Tinkers_tools)
+                #One type of artisan tool
+                self.proficiencies.append(DnDProficiencies.Constitution)
+                self.proficiencies.append(DnDProficiencies.Intelligence)
+                #Choose 2 skills from list
 
             #Fighter Conditions
             case DnDClass.Fighter:
                 self.HP = 10
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                self.proficiencies.append(DnDHeavyArmour)
+                #Shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialWeapons)
+                self.proficiencies.append(DnDProficiencies.Strength)
+                self.proficiencies.append(DnDProficiencies.Constitution)
+                #2 skills from list
 
             #Paladin Conditions
             case DnDClass.Paladin:
                 self.HP = 10
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                self.proficiencies.append(DnDHeavyArmour)
+                #Shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialWeapons)
+                self.proficiencies.append(DnDProficiencies.Wisdom)
+                self.proficiencies.append(DnDProficiencies.Charisma)
+                #2 skills from list
 
             #Ranger Conditions
             case DnDClass.Ranger:
                 self.HP = 10
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDLightArmour)
+                self.proficiencies.append(DnDMediumArmour)
+                #shields
+                self.proficiencies.append(DnDSimpleWeapons)
+                self.proficiencies.append(DnDMartialWeapons)
+                self.proficiencies.append(DnDProficiencies.Strength)
+                self.proficiencies.append(DnDProficiencies.Dexterity)
+                #3 skills from list
 
             #Sorcerer Conditions
             case DnDClass.Sorcerer:
                 self.HP = 6
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDSimpleWeapons.Dagger)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Dart)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Sling)
+                self.proficiencies.append(DnDSimpleWeapons.Quarterstaff)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Light_crossbow)
+                self.proficiencies.append(DnDProficiencies.Constitution)
+                self.proficiencies.append(DnDProficiencies.Charisma)
+                #2 skills from list
 
             #Wizard Conditions
             case DnDClass.Wizard:
                 self.HP = 6
                 self.prof_bonus = 2
+                self.proficiencies.append(DnDSimpleWeapons.Dagger)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Dart)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Sling)
+                self.proficiencies.append(DnDSimpleWeapons.Quarterstaff)
+                self.proficiencies.append(DnDSimpleRangedWeapons.Light_crossbow)
+                self.proficiencies.append(DnDProficiencies.Intelligence)
+                self.proficiencies.append(DnDProficiencies.Wisdom)
+                #2 skills from list
 
     #Race Conditions
     def set_race(self, race: DnDRace):
