@@ -279,3 +279,75 @@ dnd_containers = {
     DnDContainer.Vial: DnDContainerObject("Vial", "1 gp", "4 ounces liquid", None, ""),
     DnDContainer.Waterskin: DnDContainerObject("Waterskin", "2 sp", "4 pints liquid", "5 lb. (full)", ""),
 }
+
+class DnDWeapon:
+    def __init__(self, name, cost, damage, damage_type, weight, properties):
+        self.name = name
+        self.cost = cost
+        self.damage = damage
+        self.damage_type = damage_type
+        self.weight = weight
+        self.properties = properties
+
+dnd_simple_weapons = {
+DnDWeapon('Club', '1 sp','1d4','bludgeoning','2 lb.','Light'),
+DnDWeapon('Dagger', '2 gp','1d4','piercing','1 lb.','Finesse, light, thrown (range 20/60)'),
+DnDWeapon('Greatclub', '2 sp','1d8','bludgeoning','10 lb.','Two-handed'),
+DnDWeapon('Handaxe', '5 gp','1d6','slashing','2 lb.','Light, thrown (range 20/60)'),
+DnDWeapon('Javelin', '5 sp','1d6','piercing','2 lb.','Thrown (range 30/120)'),
+DnDWeapon('Light Hammer', '2 sp','1d4','bludgeoning','2 lb.','Light, thrown (range 20/60)'),
+DnDWeapon('Mace', '5 gp','1d6','bludgeoning','4 lb.',''),
+DnDWeapon('Quarterstaff', '2 sp','1d6','bludgeoning','4 lb.','Versatile (1d8)'),
+DnDWeapon('Sickle', '1 gp','1d4','slashing','2 lb.','Light'),
+DnDWeapon('Spear', '1 gp','1d6','piercing','3 lb.','Thrown (range 20/60), versatile (1d8)'),
+}
+#DnDWeapon('Simple Ranged Weapons', 'Cost,'Damage','','Weight','Properties')
+dnd_simple_ranged_weapons = {
+DnDWeapon('Crossbow, Light', '25 gp','1d8','piercing','5 lb.','Ammunition (range 80/320), loading, two-handed'),
+DnDWeapon('Dart', '5 cp','1d4','piercing','0.25 lb.','Finesse, thrown (range 20/60)'),
+DnDWeapon('Shortbow', '25 gp','1d6','piercing','2 lb.','Ammunition (range 80/320), two-handed'),
+DnDWeapon('Sling', '1 sp','1d4','bludgeoning','None','Ammunition (range 30/120)'),
+}
+# DnDWeapon('Martial Melee Weapons', 'Cost,'Damage','','Weight','Properties')
+dnd_martial_melee_weapons = {
+DnDWeapon('Battleaxe', '10 gp','1d8','slashing','4 lb.','Versatile (1d10)'),
+DnDWeapon('Flail', '10 gp','1d8','bludgeoning','2 lb.',''),
+DnDWeapon('Glaive', '20 gp','1d10','slashing','6 lb.','Heavy, reach, two-handed'),
+DnDWeapon('Greataxe', '30 gp','1d12','slashing','7 lb.','Heavy, two-handed'),
+DnDWeapon('Greatsword', '50 gp','2d6','slashing','6 lb.','Heavy, two-handed'),
+DnDWeapon('Halberd', '20 gp','1d10','slashing','6 lb.','Heavy, reach, two-handed'),
+DnDWeapon('Lance', '10 gp','1d12','piercing','6 lb.','Reach, special'),
+DnDWeapon('Longsword', '15 gp','1d8','slashing','3 lb.','Versatile (1d10)'),
+DnDWeapon('Maul', '10 gp','2d6','bludgeoning','10 lb.','Heavy, two-handed'),
+DnDWeapon('Morningstar', '15 gp','1d8','piercing','4 lb.',''),
+DnDWeapon('Pike', '5 gp','1d10','piercing','18 lb.','Heavy, reach, two-handed'),
+DnDWeapon('Rapier', '25 gp','1d8','piercing','2 lb.','Finesse'),
+DnDWeapon('Scimitar', '25 gp','1d6','slashing','3 lb.','Finesse, light'),
+DnDWeapon('Shortsword', '10 gp','1d6','piercing','2 lb.','Finesse, light'),
+DnDWeapon('Trident', '5 gp','1d6','piercing','4 lb.','Thrown (range 20/60), versatile (1d8)'),
+DnDWeapon('War Pick', '5 gp','1d8','piercing','2 lb.',''),
+DnDWeapon('Warhammer', '15 gp','1d8','bludgeoning','2 lb.','Versatile (1d10)'),
+DnDWeapon('Whip', '2 gp','1d4','slashing','3 lb.','Finesse, reach'),
+}
+# DnDWeapon('Martial Ranged Weapons', 'Cost,'Damage','','Weight','Properties')
+dnd_martial_ranged_weapons = {
+DnDWeapon('Blowgun', '10 gp','1','piercing','1 lb.','Ammunition (range 25/100), loading'),
+DnDWeapon('Crossbow, Hand', '75 gp','1d6','piercing','3 lb.','Ammunition (range 30/120), light, loading'),
+DnDWeapon('Crossbow, Heavy', '50 gp','1d10','piercing','18 lb.','Ammunition (range 100/400), heavy, loading, two-handed'),
+DnDWeapon('Longbow', '50 gp','1d8','piercing','2 lb.','Ammunition (range 150/600), heavy, two-handed'),
+DnDWeapon('Net', '1 gp','None','None','3 lb.','Special, thrown (range 5/15)'),
+}
+
+class DnDAmmunition:
+    def __init__(self, name, cost, weight, number):
+        self.name = name
+        self.cost = cost
+        self.weight = weight
+        self.number = number
+
+# DnDAmmunition('Ammunition', 'Cost,'Weight','Number')
+
+DnDAmmunition('Arrows', '1 gp','1lb.',20)
+DnDAmmunition('Blowgun Needles', '1 gp','1lb.',50)
+DnDAmmunition('Crossbow Bolts', '1 gp','1.5lb',20)
+DnDAmmunition('Sling Bullets', '4 cp','1.5lb',20)
