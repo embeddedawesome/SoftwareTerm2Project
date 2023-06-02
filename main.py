@@ -1,5 +1,4 @@
-from DnDCharacter import DnDCharacter, DnDRace, DnDClass, DnDBackground, convert_to_dnd_race, convert_to_dnd_background, convert_to_dnd_class, convert_to_dnd_alignment
-
+from DnDCharacter import *
 
 # Character Creation:
 def createcharacter():
@@ -31,7 +30,7 @@ def viewcharacter(character):
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
     print(f'Languages = {[l.name for l in character.languages]}')
-    print(f'Proficiencies = {[l.name for l in character.proficiencies]}')
+    print(f'Proficiencies = {[p.name for p in character.proficiencies]}')
 
 
 # Run Project
