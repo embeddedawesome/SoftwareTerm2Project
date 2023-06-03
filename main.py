@@ -1,16 +1,25 @@
+import pickle
 from DnDCharacter import *
 
 # Character Creation:
 def createcharacter():
-    race = input(f"What is your character's race? {DnDRace._member_names_}\n")
-    race = convert_to_dnd_race(race)
-    classtype = input(f"What is your character's class? {DnDClass._member_names_}\n")
-    classtype = convert_to_dnd_class(classtype)
+    race = None
+    classtype = None
+    background = None
+    align = None
+    while race == None:
+        race = input(f"What is your character's race? {DnDRace._member_names_}\n")
+        race = convert_to_dnd_race(race)
+    while classtype == None:
+        classtype = input(f"What is your character's class? {DnDClass._member_names_}\n")
+        classtype = convert_to_dnd_class(classtype)
     name = input("What is your character's name?\n")
-    background = input(f"What is your character's background? {DnDBackground._member_names_}\n")
-    background = convert_to_dnd_background(background)
-    align = input("What is your character's alignment (eg. CN, LG...)?\n")
-    align = convert_to_dnd_alignment(align)
+    while background == None:
+        background = input(f"What is your character's background? {DnDBackground._member_names_}\n")
+        background = convert_to_dnd_background(background)
+    while align == None:
+        align = input("What is your character's alignment (eg. CN, LG...)?\n")
+        align = convert_to_dnd_alignment(align)
     character = DnDCharacter(name, race, classtype, background, align)
     return character
 
@@ -29,19 +38,39 @@ def viewcharacter(character):
     print(f"Proficiency Bonus = +{character.prof_bonus}")
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
-    print(f'Languages = {[l.name for l in character.languages]}')
+    print(f'Languages = ', end='')
+    print(*[language.name for language in character.languages], sep=', ')
     print(f'Proficiencies = {[p.name for p in character.proficiencies]}')
+
+
+def load_characters(filename: str):
+    try:
+        with open(filename, "rb") as file:
+            return pickle.load(file)
+    except:
+        return []
+
+
+def save_characters(filename: str, characters):
+    with open(filename, "wb") as file:
+        pickle.dump(characters, file, pickle.HIGHEST_PROTOCOL)
 
 
 # Run Project
 if __name__ == "__main__":
-    character = None
+    characters = load_characters("characters.pickle")
     while True:
-        action = input("Create, View, Edit, or Reset? ")
+        action = input("Create, View, Edit, Save, or Reset? ")
         if action.lower() == "create":
-            character = createcharacter()
+            characters.append(createcharacter())
         elif action.lower() == "view":
-            viewcharacter(character)
+            for character in characters:
+                print("------------- Character Sheet ------------")
+                viewcharacter(character)
+                print("------------------------------------------")
         elif action.lower() == "reset":
-            character.reset()
-            print("Character Reset")
+            characters.clear()
+            print("Characters Reset")
+        elif action.lower() == "save":
+            save_characters("characters.pickle", characters)
+            print("Characters saved")
