@@ -203,15 +203,17 @@ class DnDCharacter:
         self, name: str, race: DnDRace, classtype: DnDClass, background, align: DnDAlignment
     ):
         self.name = name
-        self.race = race
         self.level = 1
         self.HP = 1
         self.AC = 0
-        self.classtype = None
-        self.set_class(classtype)
+        self.languages = []
+        self.prof_bonus = 0
         self.con = 2
-        self.background = background
         self.align = align
+        self.background = background
+        self.classtype = None
+        self.race = None
+        self.set_class(classtype)
         self.set_race(race)
 
     # Delete Character:
@@ -227,7 +229,7 @@ class DnDCharacter:
         self.align = "N/A"
         self.size = "N/A"
         self.speed = "N/A"
-        self.languages = "N/A"
+        self.languages = []
 
     # Class Conditions
     def set_class(self, classtype: DnDClass):
@@ -305,66 +307,59 @@ class DnDCharacter:
 
     #Race Conditions
     def set_race(self, race: DnDRace):
+        self.race = race
         match race:
 
             #Tiefling Conditions
             case DnDRace.Tiefling:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Infernal)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Infernal]
 
             #Half Orc Conditions
             case DnDRace.Half_Orc:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Orc)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Orc]
 
             #Half Elf Conditions
             case DnDRace.Half_Elf:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Elvish)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Elvish]
 
             #Dragonborn Conditions
             case DnDRace.Dragonborn:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Draconic)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Draconic]
 
             #Dwarf Conditions
             case DnDRace.Dwarf:
                 self.speed = '25ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Dwarvish)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Dwarvish]
 
             #Elf Conditions
             case DnDRace.Elf:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Elvish)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Elvish]
 
             #Gnome Conditions
             case DnDRace.Gnome:
                 self.speed = '25ft'
                 self.size = 'Small'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Gnomish)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Gnomish]
 
             #Halfling Conditions
             case DnDRace.Halfling:
                 self.speed = '25ft'
                 self.size = 'Small'
-                self.languages.append(DnDLanguages.Common)
-                self.languages.append(DnDLanguages.Halfling)
+                self.languages += [DnDLanguages.Common, DnDLanguages.Halfling]
 
             #Human Conditions
             case DnDRace.Human:
                 self.speed = '30ft'
                 self.size = 'Medium'
-                self.languages.append(DnDLanguages.Common)
+                self.languages += [DnDLanguages.Common]
