@@ -7,28 +7,30 @@ def convert_to_dnd_race(race):
     elif isinstance(race, int) and race in DnDRace._value2member_map_:
         return DnDRace(race)
     elif isinstance(race, str) and race.title() in DnDRace._member_names_:
-        if race in DnDRace._member_names_:
-            return DnDRace[race]
-        else:
-            race = race.lower()
-            match race[0]:
-                case 'd':
-                    match race[1]:
-                        case 'w':
-                            return DnDRace.Dwarf
-                        case 'r':
-                            return DnDRace.Dragonborn
-                case 'e':
-                    return DnDRace.Elf
-                case 'h':
-                    if 'i' in race:
-                        return DnDRace.Halfling
-                    elif 'o' in race:
-                        return DnDRace.Half_Orc
-                    elif 'e' in race:
-                        return DnDRace.Half_Elf
-                case't':
-                    return DnDRace.Tiefling
+        return DnDRace[race.title()]
+
+    if race in DnDRace._member_names_:
+        return DnDRace[race]
+    else:
+        race = race.lower()
+        match race[0]:
+            case 'd':
+                match race[1]:
+                    case 'w':
+                        return DnDRace.Dwarf
+                    case 'r':
+                        return DnDRace.Dragonborn
+            case 'e':
+                return DnDRace.Elf
+            case 'h':
+                if 'i' in race:
+                    return DnDRace.Halfling
+                elif 'o' in race:
+                    return DnDRace.Half_Orc
+                elif 'e' in race:
+                    return DnDRace.Half_Elf
+            case't':
+                return DnDRace.Tiefling
 
     return None
 
