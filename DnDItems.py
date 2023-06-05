@@ -379,8 +379,8 @@ class DnDAmmunitionObject:
 
 # DnDAmmunition('Ammunition', 'Cost,'Weight','Number')
 dnd_ammunition = {
-    DnDAmmunition.Arrows: DnDAmmunitionObject('Arrows', '1 gp', '1lb.', 20)
-    DnDAmmunition.Blowgun_Needles: DnDAmmunitionObject('Blowgun Needles', '1 gp', '1lb.', 50)
-    DnDAmmunition.Crossbow_Bolts: DnDAmmunitionObject('Crossbow Bolts', '1 gp', '1.5lb', 20)
-    DnDAmmunition.Sling_Bullets: DnDAmmunitionObject('Sling Bullets', '4 cp', '1.5lb', 20)
+    DnDAmmunition.Arrows: DnDAmmunitionObject('Arrows', '1 gp', '1lb.', 20),
+    DnDAmmunition.Blowgun_Needles: DnDAmmunitionObject('Blowgun Needles', '1 gp', '1lb.', 50),
+    DnDAmmunition.Crossbow_Bolts: DnDAmmunitionObject('Crossbow Bolts', '1 gp', '1.5lb', 20),
+    DnDAmmunition.Sling_Bullets: DnDAmmunitionObject('Sling Bullets', '4 cp', '1.5lb', 20),
 }

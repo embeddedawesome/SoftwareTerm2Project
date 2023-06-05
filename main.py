@@ -1,4 +1,4 @@
-import pickle
+from DnDCharacterDatabase import *
 from DnDCharacter import *
 
 # Character Creation:
@@ -40,37 +40,25 @@ def viewcharacter(character):
     print(f"CON = {character.con}")
     print(f'Languages = ', end='')
     print(*[language.name for language in character.languages], sep=', ')
-    print(f'Proficiencies = {[p.name for p in character.proficiencies]}')
-
-
-def load_characters(filename: str):
-    try:
-        with open(filename, "rb") as file:
-            return pickle.load(file)
-    except:
-        return []
-
-
-def save_characters(filename: str, characters):
-    with open(filename, "wb") as file:
-        pickle.dump(characters, file, pickle.HIGHEST_PROTOCOL)
+    print(f'Proficiencies = ', end='')
+    print(*[p.name for p in character.proficiencies], sep=', ')
 
 
 # Run Project
 if __name__ == "__main__":
-    characters = load_characters("characters.pickle")
+    db = DnDCharacterDatabase("characters.pickle")
     while True:
         action = input("Create, View, Edit, Save, or Reset? ")
         if action.lower() == "create":
-            characters.append(createcharacter())
+            db.characters.append(createcharacter())
         elif action.lower() == "view":
-            for character in characters:
+            for character in db.characters:
                 print("------------- Character Sheet ------------")
                 viewcharacter(character)
                 print("------------------------------------------")
         elif action.lower() == "reset":
-            characters.clear()
+            db.characters.reset()
             print("Characters Reset")
         elif action.lower() == "save":
-            save_characters("characters.pickle", characters)
+            db.save()
             print("Characters saved")

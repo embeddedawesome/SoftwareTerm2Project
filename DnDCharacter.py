@@ -125,7 +125,7 @@ class DnDCharacter:
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution]
                 #Shields
                 #choose 2 from list
 
@@ -139,7 +139,7 @@ class DnDCharacter:
             case DnDClass.Bard:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword,DnDMartialWeapons.Rapier,DnDMartialWeapons.Shortsword, DnDProficiencies.Dexterity, DnDProficiencies.Charisma)
+                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword,DnDMartialWeapons.Rapier,DnDMartialWeapons.Shortsword, DnDProficiencies.Dexterity, DnDProficiencies.Charisma]
                 #3 musical instruments of your choice
                 #any 3 skills
 
@@ -147,7 +147,7 @@ class DnDCharacter:
             case DnDClass.Cleric:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
                 #shields
                 #2 skills from list
 
@@ -155,7 +155,7 @@ class DnDCharacter:
             case DnDClass.Druid:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom]
                 #shields (no armour made of metal)
                 #2 skills from list
 
@@ -163,7 +163,7 @@ class DnDCharacter:
             case DnDClass.Monk:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDSimpleWeapons, DnDMartialWeapons.Shortsword, DnDProficiencies.Strength, DnDProficiencies.Dexterity)
+                self.proficiencies += [DnDSimpleWeapons, DnDMartialWeapons.Shortsword, DnDProficiencies.Strength, DnDProficiencies.Dexterity]
                 #1 artisan tool or musical instrument
                 #2 skills from list
 
@@ -171,21 +171,21 @@ class DnDCharacter:
             case DnDClass.Rogue:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword, DnDMartialWeapons.Rapier, DnDMartialWeapons.Shortsword, DnDMiscTools.Thieves_tools, DnDProficiencies.Dexterity, DnDProficiencies.Intelligence)
+                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword, DnDMartialWeapons.Rapier, DnDMartialWeapons.Shortsword, DnDMiscTools.Thieves_tools, DnDProficiencies.Dexterity, DnDProficiencies.Intelligence]
                 #4 skills from list
 
             #Warlock Conditions
             case DnDClass.Warlock:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma)
+                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
                 #2 skills from list
 
             #Artificer Conditions
             case DnDClass.Artificer:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDProficiencies.Constitution, DnDProficiencies.Intelligence)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDProficiencies.Constitution, DnDProficiencies.Intelligence]
                 #Shields
                 #One type of artisan tool
                 #Choose 2 skills from list
@@ -194,7 +194,7 @@ class DnDCharacter:
             case DnDClass.Fighter:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution]
                 #Shields
                 #2 skills from list
 
@@ -202,7 +202,7 @@ class DnDCharacter:
             case DnDClass.Paladin:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
                 #Shields
                 #2 skills from list
 
@@ -210,7 +210,7 @@ class DnDCharacter:
             case DnDClass.Ranger:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += (DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Dexterity)
+                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Dexterity]
                 #shields
                 #3 skills from list
 
@@ -218,14 +218,14 @@ class DnDCharacter:
             case DnDClass.Sorcerer:
                 self.HP = 6
                 self.prof_bonus = 2
-                self.proficiencies += (DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Constitution, DnDProficiencies.Charisma)
+                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Constitution, DnDProficiencies.Charisma]
                 #2 skills from list
 
             #Wizard Conditions
             case DnDClass.Wizard:
                 self.HP = 6
                 self.prof_bonus = 2
-                self.proficiencies += (DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom)
+                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom]
                 #2 skills from list
 
     #Race Conditions
