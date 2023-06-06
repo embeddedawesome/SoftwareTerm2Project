@@ -1,5 +1,13 @@
-from DnDCharacterDatabase import *
+# Isabella
+# D&D Characters
+
 from DnDCharacter import *
+from DnDCharacterDatabase import *
+
+# initialise variables
+
+# functions
+# separate file for DnDCharacter details
 
 # Character Creation:
 def createcharacter():
@@ -18,13 +26,13 @@ def createcharacter():
         background = input(f"What is your character's background? {DnDBackground._member_names_}\n")
         background = convert_to_dnd_background(background)
     while align == None:
-        align = input("What is your character's alignment (eg. CN, LG...)?\n")
+        align = input(f"What is your character's alignment? {DnDAlignment._member_names_}\n")
         align = convert_to_dnd_alignment(align)
     character = DnDCharacter(name, race, classtype, background, align)
     return character
 
 
-# View Character:
+# View Character by characteristics:
 def viewcharacter(character):
     print(f"Race = {character.race.name}")
     print(f'Size = {character.size}')
@@ -45,6 +53,7 @@ def viewcharacter(character):
 
 
 # Run Project
+# all data is converted to lowercase
 if __name__ == "__main__":
     db = DnDCharacterDatabase("characters.pickle")
     while True:

@@ -9,6 +9,29 @@ def convert_to_dnd_race(race):
     elif isinstance(race, str) and race.title() in DnDRace._member_names_:
         return DnDRace[race.title()]
 
+    if race in DnDRace._member_names_:
+        return DnDRace[race]
+    else:
+        race = race.lower()
+        match race[0]:
+            case 'd':
+                match race[1]:
+                    case 'w':
+                        return DnDRace.Dwarf
+                    case 'r':
+                        return DnDRace.Dragonborn
+            case 'e':
+                return DnDRace.Elf
+            case 'h':
+                if 'i' in race:
+                    return DnDRace.Halfling
+                elif 'o' in race:
+                    return DnDRace.Half_Orc
+                elif 'e' in race:
+                    return DnDRace.Half_Elf
+            case't':
+                return DnDRace.Tiefling
+
     return None
 
 #Viewing Class
@@ -19,6 +42,7 @@ def convert_to_dnd_class(classtype):
         return DnDClass(classtype)
     elif isinstance(classtype, str) and classtype.title() in DnDClass._member_names_:
         return DnDClass[classtype.title()]
+
 
     return None
 
@@ -125,7 +149,7 @@ class DnDCharacter:
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution]
                 #Shields
                 #choose 2 from list
 
@@ -139,7 +163,7 @@ class DnDCharacter:
             case DnDClass.Bard:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword,DnDMartialWeapons.Rapier,DnDMartialWeapons.Shortsword, DnDProficiencies.Dexterity, DnDProficiencies.Charisma]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword,DnDMartialWeapons.Rapier,DnDMartialWeapons.Shortsword, DnDAttributes.Dexterity, DnDAttributes.Charisma]
                 #3 musical instruments of your choice
                 #any 3 skills
 
@@ -147,7 +171,7 @@ class DnDCharacter:
             case DnDClass.Cleric:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDAttributes.Wisdom, DnDAttributes.Charisma]
                 #shields
                 #2 skills from list
 
@@ -155,7 +179,7 @@ class DnDCharacter:
             case DnDClass.Druid:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDAttributes.Intelligence, DnDAttributes.Wisdom]
                 #shields (no armour made of metal)
                 #2 skills from list
 
@@ -163,7 +187,7 @@ class DnDCharacter:
             case DnDClass.Monk:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDSimpleWeapons, DnDMartialWeapons.Shortsword, DnDProficiencies.Strength, DnDProficiencies.Dexterity]
+                self.proficiencies += [DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Shortsword, DnDAttributes.Strength, DnDAttributes.Dexterity]
                 #1 artisan tool or musical instrument
                 #2 skills from list
 
@@ -171,21 +195,21 @@ class DnDCharacter:
             case DnDClass.Rogue:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword, DnDMartialWeapons.Rapier, DnDMartialWeapons.Shortsword, DnDMiscTools.Thieves_tools, DnDProficiencies.Dexterity, DnDProficiencies.Intelligence]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialRangedWeapons.Hand_crossbow, DnDMartialWeapons.Longsword, DnDMartialWeapons.Rapier, DnDMartialWeapons.Shortsword, DnDMiscTools.Thieves_tools, DnDAttributes.Dexterity, DnDAttributes.Intelligence]
                 #4 skills from list
 
             #Warlock Conditions
             case DnDClass.Warlock:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDSimpleWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDAttributes.Wisdom, DnDAttributes.Charisma]
                 #2 skills from list
 
             #Artificer Conditions
             case DnDClass.Artificer:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDProficiencies.Constitution, DnDProficiencies.Intelligence]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDAttributes.Constitution, DnDAttributes.Intelligence]
                 #Shields
                 #One type of artisan tool
                 #Choose 2 skills from list
@@ -194,7 +218,7 @@ class DnDCharacter:
             case DnDClass.Fighter:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Constitution]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution]
                 #Shields
                 #2 skills from list
 
@@ -202,7 +226,7 @@ class DnDCharacter:
             case DnDClass.Paladin:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDHeavyArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Wisdom, DnDProficiencies.Charisma]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Wisdom, DnDAttributes.Charisma]
                 #Shields
                 #2 skills from list
 
@@ -210,7 +234,7 @@ class DnDCharacter:
             case DnDClass.Ranger:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour, DnDMediumArmour, DnDSimpleWeapons, DnDMartialWeapons, DnDProficiencies.Strength, DnDProficiencies.Dexterity]
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Dexterity]
                 #shields
                 #3 skills from list
 
@@ -218,14 +242,14 @@ class DnDCharacter:
             case DnDClass.Sorcerer:
                 self.HP = 6
                 self.prof_bonus = 2
-                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Constitution, DnDProficiencies.Charisma]
+                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDAttributes.Constitution, DnDAttributes.Charisma]
                 #2 skills from list
 
             #Wizard Conditions
             case DnDClass.Wizard:
                 self.HP = 6
                 self.prof_bonus = 2
-                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDProficiencies.Intelligence, DnDProficiencies.Wisdom]
+                self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDAttributes.Intelligence, DnDAttributes.Wisdom]
                 #2 skills from list
 
     #Race Conditions

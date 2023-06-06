@@ -120,8 +120,10 @@ class DnDMartialRangedWeapons(Enum):
     Longbow = auto()
     Net = auto()
 
-class DnDProficiencies(Enum):
-    Shields = auto()
+class DnDShields(Enum):
+    Shield = auto()
+
+class DnDAttributes(Enum):
     Strength = auto()
     Dexterity = auto()
     Constitution = auto()
