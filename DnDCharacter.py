@@ -43,6 +43,43 @@ def convert_to_dnd_class(classtype):
     elif isinstance(classtype, str) and classtype.title() in DnDClass._member_names_:
         return DnDClass[classtype.title()]
 
+    if classtype in DnDClass._member_names_:
+        return DnDClass[classtype]
+    else:
+        classtype = classtype.lower()
+        match classtype[0]:
+            case 'a':
+                return DnDClass.Artificer
+
+            case 'c':
+                return DnDClass.Cleric
+
+            case 'd':
+                return DnDClass.Druid
+
+            case 'f':
+                return DnDClass.Fighter
+
+            case 'm':
+                return DnDClass.Monk
+
+            case 'p':
+                return DnDClass.Paladin
+
+            case 's':
+                return DnDClass.Sorcerer
+
+            case 'w':
+                if classtype[1] == 'i':
+                    return DnDClass.Wizard
+                else:
+                    return DnDClass.Warlock
+
+            case 'r':
+                 match classtype[1]:
+                     case 'a':
+                         return DnDClass.Ranger
+
 
     return None
 
