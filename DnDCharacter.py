@@ -88,6 +88,12 @@ def convert_to_dnd_class(classtype):
 
                      case 'o':
                          return DnDClass.Rogue
+            case 'b':
+                match classtype[1]:
+                    case 'b':
+                        return DnDClass.Barbarian
+                    case 'd':
+                        return DnDClass.Bard
 
 
     return None
@@ -150,6 +156,17 @@ def convert_to_dnd_background(background):
                 return DnDBackground.Urchin
 
     return None
+
+def convert_to_dnd_martialweapons(weapons):
+    if isinstance(weapons, DnDMartialWeapons):
+        return weapons
+    elif isinstance(weapons, int) and weapons in DnDMartialWeapons._value2member_map_:
+        return DnDMartialWeapons(weapons)
+    elif isinstance(weapons, str) and weapons.title().replace(" ", "_") in DnDMartialWeapons._member_names_:
+        return DnDMartialWeapons[weapons.title().replace(" ", "_")]
+
+    if weapons in DnDMartialWeapons._member_names_:
+        return DnDMartialWeapons[weapons]
 
 #Viewing Alignment
 def convert_to_dnd_alignment(alignment):
@@ -249,7 +266,8 @@ class DnDCharacter:
                 self.prof_bonus = 2
                 self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution, DnDShields.Shield]
                 #choose 2 from list
-                self.weapons = input(f"Choose a weapon for your character: {DnDMartialWeapons._member_names_}\n")
+                weapons = input(f"Choose a weapon for your character: {DnDMartialWeapons._member_names_}\n")
+                self.weapons += [weapons]
 
 
             #Bard Conditions
