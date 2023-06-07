@@ -39,6 +39,8 @@ def viewcharacter(character):
     print(f"CON = {character.con}")
     print(f'Languages = {[l.name for l in character.languages]}')
     print(f'Proficiencies = {[p.name for p in character.proficiencies]}')
+    print(f'Inventory = {[i.name for i in character.inventory]}')
+    print(f'Weapons = {[w.name for w in character.weapons]}')
 
 
 # Run Project
