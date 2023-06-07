@@ -18,17 +18,23 @@ def convert_to_dnd_race(race):
                 match race[1]:
                     case 'w':
                         return DnDRace.Dwarf
+
                     case 'r':
                         return DnDRace.Dragonborn
+
             case 'e':
                 return DnDRace.Elf
+
             case 'h':
                 if 'i' in race:
                     return DnDRace.Halfling
+
                 elif 'o' in race:
                     return DnDRace.Half_Orc
+
                 elif 'e' in race:
                     return DnDRace.Half_Elf
+
             case't':
                 return DnDRace.Tiefling
 
@@ -43,6 +49,52 @@ def convert_to_dnd_class(classtype):
     elif isinstance(classtype, str) and classtype.title() in DnDClass._member_names_:
         return DnDClass[classtype.title()]
 
+    if classtype in DnDClass._member_names_:
+        return DnDClass[classtype]
+    else:
+        classtype = classtype.lower()
+        match classtype[0]:
+            case 'a':
+                return DnDClass.Artificer
+
+            case 'c':
+                return DnDClass.Cleric
+
+            case 'd':
+                return DnDClass.Druid
+
+            case 'f':
+                return DnDClass.Fighter
+
+            case 'm':
+                return DnDClass.Monk
+
+            case 'p':
+                return DnDClass.Paladin
+
+            case 's':
+                return DnDClass.Sorcerer
+
+            case 'w':
+                if classtype[1] == 'i':
+                    return DnDClass.Wizard
+                else:
+                    return DnDClass.Warlock
+
+            case 'r':
+                 match classtype[1]:
+                     case 'a':
+                         return DnDClass.Ranger
+
+                     case 'o':
+                         return DnDClass.Rogue
+            case 'b':
+                match classtype[1]:
+                    case 'b':
+                        return DnDClass.Barbarian
+                    case 'd':
+                        return DnDClass.Bard
+
 
     return None
 
@@ -55,7 +107,60 @@ def convert_to_dnd_background(background):
     elif isinstance(background, str) and background.title().replace(" ", "_") in DnDBackground._member_names_:
         return DnDBackground[background.title().replace(" ", "_")]
 
+    if background in DnDBackground._member_names_:
+        return DnDBackground[background]
+    else:
+        background = background.lower()
+        match background[0]:
+            case 'a':
+                return DnDBackground.Acolyte
+
+            case 'c':
+                match background[1]:
+                    case 'h':
+                        return DnDBackground.Charlatan
+
+                    case 'r':
+                        return DnDBackground.Criminal
+
+            case 'e':
+                return DnDBackground.Entertainer
+
+            case 'f':
+                return DnDBackground.Folk_Hero
+
+            case 'g':
+                return DnDBackground.Guild_Artisan
+
+            case 'h':
+                return DnDBackground.Hermit
+
+            case 'n':
+                return DnDBackground.Noble
+
+            case 'o':
+                return DnDBackground.Outlander
+
+            case 's':
+                if background[1] == 'a':
+                    return DnDBackground.Sage
+                else:
+                    match background[2]:
+                        case 'i':
+                            return DnDBackground.Sailor
+
+                        case 'l':
+                            return DnDBackground.Soldier
+
+            case 'u':
+                return DnDBackground.Urchin
+
     return None
+
+def convert_to_dnd_martialweapons(weapons):
+    weapons = weapons.lower()
+    weapons = weapons[0].upper()
+    return weapons
 
 #Viewing Alignment
 def convert_to_dnd_alignment(alignment):
@@ -113,6 +218,8 @@ class DnDCharacter:
         self.AC = 0
         self.languages = []
         self.proficiencies = []
+        self.inventory = []
+        self.weapons = []
         self.classtype = None
         self.set_class(classtype)
         self.con = 2
@@ -135,6 +242,8 @@ class DnDCharacter:
         self.speed = "N/A"
         self.languages = []
         self.proficiencies = "N/A"
+        self.inventory = "N/A"
+        self.weapons = "N/A"
 
     # Class Conditions
     def set_class(self, classtype: DnDClass):
@@ -149,15 +258,11 @@ class DnDCharacter:
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution]
-                #Shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution, DnDShields.Shield]
                 #choose 2 from list
+                weapons = input(f"Choose a weapon for your character: {DnDMartialWeapons._member_names_}\n")
+                self.weapons += [DnDMartialWeapons.[weapons]]
 
-                #choice1 = input('Would you like a greataxe or a different martial melee weapon? ')
-                #if choice1 == 'greataxe':
-                #   self.weapons.append(DnDMartialWeapons.Greataxe)
-                #elif choice1 == 'different martial melee weapon':
-                #    self.weapons.append(DnDMartialWeapons.(input('Which weapon? '))
 
             #Bard Conditions
             case DnDClass.Bard:
@@ -171,16 +276,14 @@ class DnDCharacter:
             case DnDClass.Cleric:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDAttributes.Wisdom, DnDAttributes.Charisma]
-                #shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDAttributes.Wisdom, DnDAttributes.Charisma, DnDShields.Shield]
                 #2 skills from list
 
             #Druid Conditions
             case DnDClass.Druid:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDAttributes.Intelligence, DnDAttributes.Wisdom]
-                #shields (no armour made of metal)
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDMartialWeapons.Scimitar, DnDSimpleWeapons.Sickle, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Spear, DnDMiscTools.Herbalism_kit, DnDAttributes.Intelligence, DnDAttributes.Wisdom, DnDShields.Shield]
                 #2 skills from list
 
             #Monk Conditions
@@ -209,8 +312,7 @@ class DnDCharacter:
             case DnDClass.Artificer:
                 self.HP = 8
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDAttributes.Constitution, DnDAttributes.Intelligence]
-                #Shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMiscTools.Thieves_tools, DnDArtisanTools.Tinkers_tools, DnDAttributes.Constitution, DnDAttributes.Intelligence, DnDShields.Shield]
                 #One type of artisan tool
                 #Choose 2 skills from list
 
@@ -218,24 +320,21 @@ class DnDCharacter:
             case DnDClass.Fighter:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution]
-                #Shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution, DnDShields.Shield]
                 #2 skills from list
 
             #Paladin Conditions
             case DnDClass.Paladin:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Wisdom, DnDAttributes.Charisma]
-                #Shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDHeavyArmour.Chain_mail_armour, DnDHeavyArmour.Ring_mail_armour, DnDHeavyArmour.Plate_armour, DnDHeavyArmour.Splint_armour, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Wisdom, DnDAttributes.Charisma, DnDShields.Shield]
                 #2 skills from list
 
             #Ranger Conditions
             case DnDClass.Ranger:
                 self.HP = 10
                 self.prof_bonus = 2
-                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Dexterity]
-                #shields
+                self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Dexterity, DnDShields.Shield]
                 #3 skills from list
 
             #Sorcerer Conditions
