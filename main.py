@@ -49,10 +49,11 @@ if __name__ == "__main__":
     character = None
     while True:
         action = input("Create, View, Edit, or Reset? ")
-        if action.lower() == "create":
-            character = createcharacter()
-        elif action.lower() == "view":
-            viewcharacter(character)
-        elif action.lower() == "reset":
-            character.reset()
-            print("Character Reset")
+        match action.lower()[0]:
+            case'c':
+                character = createcharacter()
+            case'v':
+                viewcharacter(character)
+            case'r':
+                character.reset()
+                print("Character Reset")
