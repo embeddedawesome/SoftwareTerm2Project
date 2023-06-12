@@ -2,14 +2,14 @@ from enum import Enum, auto
 
 #Race names
 class DnDRace(Enum):
+    Dragonborn = auto()
     Dwarf = auto()
     Elf = auto()
-    Halfling = auto()
-    Human = auto()
-    Dragonborn = auto()
     Gnome = auto()
     Half_Elf = auto()
+    Halfling = auto()
     Half_Orc = auto()
+    Human = auto()
     Tiefling = auto()
 
 #Class Names

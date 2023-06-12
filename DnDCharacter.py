@@ -183,6 +183,7 @@ def convert_to_dnd_alignment(alignment):
                             return DnDAlignment.Chaotic_Neutral
                         case 'e':
                             return DnDAlignment.Chaotic_Evil
+
                 case 't':
                     if alignment[1] == 'n':
                         return DnDAlignment.True_Neutral

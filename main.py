@@ -7,10 +7,10 @@ from DnDCharacter import *
 
 # functions
 # separate file for DnDCharacter details
-
 # Character Creation:
 def createcharacter():
-    race = input(f"What is your character's race? {DnDRace._member_names_}\n")
+    for r in DnDRace:
+        race = input(f"What is your character's race? {r.value}': '{r.name}\n")
     race = convert_to_dnd_race(race)
     classtype = input(f"What is your character's class? {DnDClass._member_names_}\n")
     classtype = convert_to_dnd_class(classtype)
@@ -37,14 +37,18 @@ def viewcharacter(character):
     print(f"Proficiency Bonus = +{character.prof_bonus}")
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
-    print(f'Languages = {[l.name for l in character.languages]}')
-    print(f'Proficiencies = {[p.name for p in character.proficiencies]}')
-    print(f'Inventory = {[i.name for i in character.inventory]}')
-    print(f'Weapons = {[w.name for w in character.weapons]}')
+    print(f'Languages = ', end='')
+    print(*[language.name for language in character.languages], sep=', ')
+    print(f'Proficiencies = ', end='')
+    print(*[proficiency.name for proficiency in character.proficiencies], sep=', ')
+    print(f'Inventory = ', end='')
+    print(*[inventory.name for inventory in character.inventory], sep=', ')
+    print(f'Weapons = ', end='')
+    print(*[weapons.name for weapons in character.weapons], sep=', ')
 
 
 # Run Project
-# all data is converted to lowercase
+#All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use.
 if __name__ == "__main__":
     character = None
     while True:
