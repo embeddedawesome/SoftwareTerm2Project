@@ -1,16 +1,16 @@
 from enum import Enum, auto
-from DnDItems import *
+#from DnDItems import *
 
 # Race names
 class DnDRace(Enum):
+    Dragonborn = auto()
     Dwarf = auto()
     Elf = auto()
-    Halfling = auto()
-    Human = auto()
-    Dragonborn = auto()
     Gnome = auto()
     Half_Elf = auto()
+    Halfling = auto()
     Half_Orc = auto()
+    Human = auto()
     Tiefling = auto()
 
 
@@ -253,26 +253,3 @@ class DnDClassDetails:
         self.proficiency_list = prof_list
         self.starting_inventory = inventory  # A list of tuples that have a specific enum and count or a enum class and count
 
-
-dnd_class_details = {
-    DnDClass.Barbarian: DnDClassDetails(12, 2, [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour,
-                                                DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour,
-                                                DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour,
-                                                DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate,
-                                                DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club,
-                                                DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub,
-                                                DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin,
-                                                DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace,
-                                                DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle,
-                                                DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe,
-                                                DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive,
-                                                DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword,
-                                                DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance,
-                                                DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul,
-                                                DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike,
-                                                DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar,
-                                                DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident,
-                                                DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer,
-                                                DnDMartialWeapons.Whip, DnDAttributes.Strength,
-                                                DnDAttributes.Constitution, DnDShields.Shield], [{DnDMartialWeapons, 1}, {DnDEquipmentPacks.Explorers_pack, 1}, {DnDSimpleWeapons.Javelin, 4}] ),
-}

@@ -4,8 +4,8 @@ from DnDData import *
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
         return race
-    elif isinstance(race, int) and race in DnDRace._value2member_map_:
-        return DnDRace(race)
+    elif race.isdigit() and int(race) in DnDRace._value2member_map_:
+        return DnDRace(int(race))
     elif isinstance(race, str) and race.title() in DnDRace._member_names_:
         return DnDRace[race.title()]
 
@@ -44,8 +44,8 @@ def convert_to_dnd_race(race):
 def convert_to_dnd_class(classtype):
     if isinstance(classtype, DnDClass):
         return classtype
-    elif isinstance(classtype, int) and classtype in DnDClass._value2member_map_:
-        return DnDClass(classtype)
+    elif classtype.isdigit() and int(classtype) in DnDClass._value2member_map_:
+        return DnDClass(int(classtype))
     elif isinstance(classtype, str) and classtype.title() in DnDClass._member_names_:
         return DnDClass[classtype.title()]
 
@@ -102,8 +102,8 @@ def convert_to_dnd_class(classtype):
 def convert_to_dnd_background(background):
     if isinstance(background, DnDBackground):
         return background
-    elif isinstance(background, int) and background in DnDBackground._value2member_map_:
-        return DnDBackground(background)
+    elif background.isdigit() and int(background) in DnDBackground._value2member_map_:
+        return DnDBackground(int(background))
     elif isinstance(background, str) and background.title().replace(" ", "_") in DnDBackground._member_names_:
         return DnDBackground[background.title().replace(" ", "_")]
 
@@ -166,8 +166,8 @@ def convert_to_dnd_martialweapons(weapons):
 def convert_to_dnd_alignment(alignment):
     if isinstance(alignment, DnDAlignment):
         return alignment
-    elif isinstance(alignment, int) and alignment in DnDAlignment._value2member_map_:
-        return DnDAlignment(alignment)
+    elif alignment.isdigit() and int(alignment) in DnDAlignment._value2member_map_:
+        return DnDAlignment(int(alignment))
     elif isinstance(alignment, str):
         alignment = alignment.title().replace(" ", "_")
         if alignment in DnDAlignment._member_names_:
@@ -183,6 +183,7 @@ def convert_to_dnd_alignment(alignment):
                             return DnDAlignment.Chaotic_Neutral
                         case 'e':
                             return DnDAlignment.Chaotic_Evil
+
                 case 't':
                     if alignment[1] == 'n':
                         return DnDAlignment.True_Neutral
@@ -260,8 +261,7 @@ class DnDCharacter:
                 self.prof_bonus = 2
                 self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution, DnDShields.Shield]
                 #choose 2 from list
-                weapons = input(f"Choose a weapon for your character: {DnDMartialWeapons._member_names_}\n")
-                self.weapons += [DnDMartialWeapons.[weapons]]
+
 
 
             #Bard Conditions
