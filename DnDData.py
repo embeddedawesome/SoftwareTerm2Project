@@ -1,6 +1,7 @@
 from enum import Enum, auto
+from DnDItems import *
 
-#Race names
+# Race names
 class DnDRace(Enum):
     Dwarf = auto()
     Elf = auto()
@@ -12,7 +13,8 @@ class DnDRace(Enum):
     Half_Orc = auto()
     Tiefling = auto()
 
-#Class Names
+
+# Class Names
 class DnDClass(Enum):
     Artificer = auto()
     Barbarian = auto()
@@ -28,7 +30,8 @@ class DnDClass(Enum):
     Warlock = auto()
     Wizard = auto()
 
-#Background Names
+
+# Background Names
 class DnDBackground(Enum):
     Acolyte = auto()
     Charlatan = auto()
@@ -44,7 +47,8 @@ class DnDBackground(Enum):
     Soldier = auto()
     Urchin = auto()
 
-#Alignment Names
+
+# Alignment Names
 class DnDAlignment(Enum):
     Lawful_Good = auto()
     Neutral_Good = auto()
@@ -56,7 +60,8 @@ class DnDAlignment(Enum):
     Neutral_Evil = auto()
     Chaotic_Evil = auto()
 
-#Language Names
+
+# Language Names
 class DnDLanguages(Enum):
     Common = auto()
     Dwarvish = auto()
@@ -71,7 +76,8 @@ class DnDLanguages(Enum):
     Draconic = auto()
     Infernal = auto()
 
-#Simple Weapons
+
+# Simple Weapons
 class DnDSimpleWeapons(Enum):
     Club = auto()
     Dagger = auto()
@@ -84,14 +90,16 @@ class DnDSimpleWeapons(Enum):
     Sickle = auto()
     Spear = auto()
 
-#Simple Ranged Weapons
+
+# Simple Ranged Weapons
 class DnDSimpleRangedWeapons(Enum):
     Light_crossbow = auto()
     Dart = auto()
     Shortbow = auto()
     Sling = auto()
 
-#Martial Weapons
+
+# Martial Weapons
 class DnDMartialWeapons(Enum):
     Battleaxe = auto()
     Flail = auto()
@@ -112,7 +120,8 @@ class DnDMartialWeapons(Enum):
     Warhammer = auto()
     Whip = auto()
 
-#Martial Ranged Weapons
+
+# Martial Ranged Weapons
 class DnDMartialRangedWeapons(Enum):
     Blowgun = auto()
     Heavy_crossbow = auto()
@@ -120,8 +129,10 @@ class DnDMartialRangedWeapons(Enum):
     Longbow = auto()
     Net = auto()
 
+
 class DnDShields(Enum):
     Shield = auto()
+
 
 class DnDAttributes(Enum):
     Strength = auto()
@@ -130,6 +141,7 @@ class DnDAttributes(Enum):
     Intelligence = auto()
     Wisdom = auto()
     Charisma = auto()
+
 
 class DnDArtisanTools(Enum):
     Alchemist_supplies = auto()
@@ -150,11 +162,13 @@ class DnDArtisanTools(Enum):
     Weavers_tools = auto()
     Woodcarvers_tools = auto()
 
+
 class DnDGamingSets(Enum):
     Dice_set = auto()
     Dragonchess_set = auto()
     Playing_card_set = auto()
     Three_Dragon_Ante_set = auto()
+
 
 class DnDMusicalInstruments(Enum):
     Bagpipes = auto()
@@ -168,6 +182,7 @@ class DnDMusicalInstruments(Enum):
     Shawm = auto()
     Viol = auto()
 
+
 class DnDMiscTools(Enum):
     Disguise_kit = auto()
     Forgery_kit = auto()
@@ -176,10 +191,12 @@ class DnDMiscTools(Enum):
     Poisoners_kit = auto()
     Thieves_tools = auto()
 
+
 class DnDLightArmour(Enum):
     Padded_armour = auto()
     Leather_armour = auto()
     Studded_leather_armour = auto()
+
 
 class DnDMediumArmour(Enum):
     Hide_armour = auto()
@@ -189,11 +206,13 @@ class DnDMediumArmour(Enum):
     Breastplate = auto()
     Halfplate = auto()
 
+
 class DnDHeavyArmour(Enum):
     Ring_mail_armour = auto()
     Chain_mail_armour = auto()
     Splint_armour = auto()
     Plate_armour = auto()
+
 
 class DnDEquipmentPacks(Enum):
     Burglars_pack = auto()
@@ -203,6 +222,7 @@ class DnDEquipmentPacks(Enum):
     Explorers_pack = auto()
     Priests_pack = auto()
     Scholars_pack = auto()
+
 
 class DnDSkills(Enum):
     Acrobatics = auto()
@@ -223,3 +243,36 @@ class DnDSkills(Enum):
     Sleight_of_hand = auto()
     Stealth = auto()
     Survival = auto()
+
+
+class DnDClassDetails:
+
+    def __init__(self, hp, prof_bonus, prof_list, inventory):
+        self.HP = hp
+        self.prof_bonus = prof_bonus
+        self.proficiency_list = prof_list
+        self.starting_inventory = inventory  # A list of tuples that have a specific enum and count or a enum class and count
+
+
+dnd_class_details = {
+    DnDClass.Barbarian: DnDClassDetails(12, 2, [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour,
+                                                DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour,
+                                                DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour,
+                                                DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate,
+                                                DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club,
+                                                DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub,
+                                                DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin,
+                                                DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace,
+                                                DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle,
+                                                DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe,
+                                                DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive,
+                                                DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword,
+                                                DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance,
+                                                DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul,
+                                                DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike,
+                                                DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar,
+                                                DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident,
+                                                DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer,
+                                                DnDMartialWeapons.Whip, DnDAttributes.Strength,
+                                                DnDAttributes.Constitution, DnDShields.Shield], [{DnDMartialWeapons, 1}, {DnDEquipmentPacks.Explorers_pack, 1}, {DnDSimpleWeapons.Javelin, 4}] ),
+}
