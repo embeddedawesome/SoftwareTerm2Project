@@ -215,13 +215,13 @@ class DnDHeavyArmour(Enum):
 
 
 class DnDEquipmentPacks(Enum):
-    Burglars_pack = auto()
-    Diplomats_pack = auto()
-    Dungeoneers_pack = auto()
-    Entertainers_pack = auto()
-    Explorers_pack = auto()
-    Priests_pack = auto()
-    Scholars_pack = auto()
+    Burglars_Pack = auto()
+    Diplomats_Pack = auto()
+    Dungeoneers_Pack = auto()
+    Entertainers_Pack = auto()
+    Explorers_Pack = auto()
+    Priests_Pack = auto()
+    Scholars_Pack = auto()
 
 
 class DnDSkills(Enum):

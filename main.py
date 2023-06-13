@@ -1,45 +1,33 @@
 # Isabella
 # D&D Characters
+import enum
 
 from DnDCharacter import *
 from DnDCharacterDatabase import *
-
+from DnDItems import *
 # initialise variables
 
 # functions
 # separate file for DnDCharacter details
 # Character Creation:
 def createcharacter():
-    race = None
-    classtype = None
-    background = None
-    align = None
-    while race == None:
-        print(f"What is your character's race?")
-        for race in DnDRace:
-            print(f"{race.value}: {race.name}")
-        race = input()
-        race = convert_to_dnd_race(race)
-    while classtype == None:
-        print(f"What is your character's class?")
-        for c in DnDClass:
-            print(f"{c.value}: {c.name}")
-        classtype = input()
-        classtype = convert_to_dnd_class(classtype)
+    race = make_decision("What is your character's race?", DnDRace)
+    classtype = make_decision("What is your character's class?", DnDClass)
+
     name = input("What is your character's name?\n")
-    while background == None:
-        print(f"What is your character's background?")
-        for b in DnDBackground:
-            print(f"{b.value}: {b.name}")
-        background = input()
-        background = convert_to_dnd_background(background)
-    while align == None:
-        print(f"What is your character's alignment?")
-        for a in DnDAlignment:
-            print(f"{a.value}: {a.name}")
-        align = input()
-        align = convert_to_dnd_alignment(align)
+
+    background = make_decision("What is your character's background?", DnDBackground)
+    align = make_decision("What is your character's alignment?", DnDAlignment)
+
     character = DnDCharacter(name, race, classtype, background, align)
+
+    match classtype:
+        case DnDClass.Wizard:
+            weapon = make_decision("Select a weapon", [DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Dagger])
+            magic_item = make_decision("Select a magic item", [DnDItem.Component_Pouch, *[item for item in DnDItem if dnd_items[item].item_type == DnDItemType.Arcane_Focus] ])
+            pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_pack, DnDEquipmentPacks.Explorers_pack])
+            character.inventory += [DnDItem.Spellbook, weapon, magic_item, pack]
+
     return character
 
 
@@ -65,6 +53,52 @@ def viewcharacter(character):
     print(*[inventory.name for inventory in character.inventory], sep=', ')
     print(f'Weapons = ', end='')
     print(*[weapons.name for weapons in character.weapons], sep=', ')
+
+
+# Helper function to ask questions and process answers
+def make_decision(question, constraints):
+    # Keep asking question while we don't have an acceptable answer
+    while True:
+        # Print the question
+        print(question)
+
+        # Print the options
+        if isinstance(constraints, enum.EnumType):
+            # If the constraint is an EnumType we iterate through the values
+            for i in constraints:
+                print(f"{i.value}: {i.name}")
+        elif isinstance(constraints, list):
+            # If the constraint is a list of entries, iterate through each entry
+            for i in range(len(constraints)):
+                # If the entry is a value of an Enum class, we print its name
+                if isinstance(constraints[i], enum.Enum):
+                    print(f"{i}: {constraints[i].name}")
+                else:
+                    # Otherwise we treat it as a string and print its value
+                    print(f"{i}: {constraints[i]}")
+
+
+        # Wait for input
+        answer = input()
+
+        # Validate input as per constraints
+        if isinstance(constraints, enum.EnumType):
+            # Check if the input is a number we can use as an index
+            if answer.isdigit() and int(answer) in constraints._value2member_map_:
+                return constraints(int(answer))
+            # Check if the string matches
+            elif answer.title().replace(" ", "_") in constraints._member_names_:
+                return constraints[answer.title().replace(" ", "_")]
+        elif isinstance(constraints, list):
+            if answer.isdigit() and int(answer) < len(constraints):
+                return constraints[int(answer)]
+            else:
+                for option in constraints:
+                    if isinstance(option, str) and answer.lower() == option.lower():
+                        return option
+                    elif isinstance(option, enum.Enum) and answer.lower().replace(" ", "_") == option.name.lower():
+                        return option
+
 
 
 # Run Project
