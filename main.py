@@ -25,7 +25,7 @@ def createcharacter():
         case DnDClass.Wizard:
             weapon = make_decision("Select a weapon", [DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Dagger])
             magic_item = make_decision("Select a magic item", [DnDItem.Component_Pouch, *[item for item in DnDItem if dnd_items[item].item_type == DnDItemType.Arcane_Focus] ])
-            pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_pack, DnDEquipmentPacks.Explorers_pack])
+            pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_Pack, DnDEquipmentPacks.Explorers_Pack])
             character.inventory += [DnDItem.Spellbook, weapon, magic_item, pack]
 
     return character
