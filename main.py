@@ -22,10 +22,14 @@ def createcharacter():
     character = DnDCharacter(name, race, classtype, background, align)
     match classtype:
         case DnDClass.Wizard:
+            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
+            skillprof2 = make_decision("Select another skill", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
             weapon = make_decision("Select a weapon", [DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Dagger])
-            magic_item = make_decision("Select a magic item", [DnDItems.Component_Pouch, DnDArcaneFocus.Orb, DnDArcaneFocus.Rod, DnDArcaneFocus.Wand, DnDArcaneFocus.Staff, DnDArcaneFocus.Crystal])
+            magic_item = make_decision("Select a magic item", [DnDItems.Component_Pouch, DnDItems.Orb, DnDItems.Rod, DnDItems.Wand, DnDItems.Staff, DnDItems.Crystal])
             pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_pack, DnDEquipmentPacks.Explorers_pack])
-            character.inventory += [DnDItems.Spellbook, weapon, magic_item, pack]
+            character.inventory += [DnDItems.Spellbook, magic_item, pack]
+            character.weapons += [weapon]
+            character.proficiencies += [skillprof1, skillprof2]
 
     return character
 

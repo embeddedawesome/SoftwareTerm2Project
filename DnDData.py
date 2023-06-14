@@ -299,10 +299,3 @@ class DnDItems(Enum):
     Amulet = auto()
     Emblem = auto()
     Reliquary = auto()
-
-class DnDArcaneFocus:
-    Crystal = auto()
-    Orb = auto()
-    Rod = auto()
-    Staff = auto()
-    Wand = auto()
