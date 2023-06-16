@@ -42,6 +42,19 @@ def createcharacter():
 
     return character
 
+def make_string(input):
+    if isinstance(input, str):
+        return input
+    elif isinstance(input, enum.Enum):
+        return input.name.replace("_", " ")
+    elif isinstance(input, enum.EnumType):
+        return ','.join([i.name.replace("_", " ") for i in input])
+    elif isinstance(input, tuple):
+        if isinstance(input[1], enum.Enum):
+            return f"{input[0]}x {input[1].name.replace('_', ' ')}"
+        else:
+            return f"{input[0]}x {input[1]}"
+
 
 # View Character by characteristics:
 def viewcharacter(character):
@@ -58,13 +71,13 @@ def viewcharacter(character):
     print(f"AC = {character.AC}")
     print(f"CON = {character.con}")
     print(f'Languages = ', end='')
-    print(*[language.name for language in character.languages], sep=', ')
+    print(*[make_string(language) for language in character.languages], sep=', ')
     print(f'Proficiencies = ', end='')
-    print(*[proficiency.name for proficiency in character.proficiencies], sep=', ')
+    print(*[make_string(proficiency) for proficiency in character.proficiencies], sep=', ')
     print(f'Inventory = ', end='')
-    print(*[inventory.name for inventory in character.inventory], sep=', ')
+    print(*[make_string(inventory) for inventory in character.inventory], sep=', ')
     print(f'Weapons = ', end='')
-    print(*[weapons.name for weapons in character.weapons], sep=', ')
+    print(*[make_string(weapons) for weapons in character.weapons], sep=', ')
 
 # Helper function to ask questions and process answers
 def make_decision(question, constraints):
