@@ -72,12 +72,12 @@ def make_decision(question, constraints):
         # If the constraint is a list of entries, iterate through each entry
         for i in constraints:
             # If the entry is a value of an Enum class, we print its name
-            if isinstance(constraints[i], enum.Enum):
-                options += [(constraints[i].name.replace("_", " "), constraints[i])]
-            if isinstance(constraints[i], enum.EnumType):
-                options += [(j.name.replace("_", " "), j) for j in constraints[i]]
+            if isinstance(i, enum.Enum):
+                options += [(make_string(i), i)]
+            elif isinstance(i, enum.EnumType):
+                options += [(make_string(j), j) for j in i]
             else:
-                options += [(constraints[i], constraints[i])]
+                options += [(i, i)]
 
     # Keep asking question while we don't have an acceptable answer
     while True:
