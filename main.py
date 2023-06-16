@@ -11,14 +11,10 @@ from DnDCharacter import *
 # Character Creation:
 def createcharacter():
     race = make_decision("What is your character's race?", DnDRace)
-    race = convert_to_dnd_race(race)
     classtype = make_decision("What is your character's class?", DnDClass)
-    classtype = convert_to_dnd_class(classtype)
     name = input("What is your character's name?\n")
     background = make_decision("What is your character's background?", DnDBackground)
-    background = convert_to_dnd_background(background)
     align = make_decision("What is your character's alignment?", DnDAlignment)
-    align = convert_to_dnd_alignment(align)
     character = DnDCharacter(name, race, classtype, background, align)
     match classtype:
         case DnDClass.Barbarian:
