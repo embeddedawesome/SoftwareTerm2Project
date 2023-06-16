@@ -68,47 +68,40 @@ def viewcharacter(character):
 
 # Helper function to ask questions and process answers
 def make_decision(question, constraints):
+    # Generate the option list
+    options = []
+    if isinstance(constraints, enum.EnumType):
+        options += [(i.name.replace("_", " "), i) for i in constraints]
+    elif isinstance(constraints, list):
+        # If the constraint is a list of entries, iterate through each entry
+        for i in constraints:
+            # If the entry is a value of an Enum class, we print its name
+            if isinstance(constraints[i], enum.Enum):
+                options += [(constraints[i].name.replace("_", " "), constraints[i])]
+            if isinstance(constraints[i], enum.EnumType):
+                options += [(j.name.replace("_", " "), j) for j in constraints[i]]
+            else:
+                options += [(constraints[i], constraints[i])]
+
     # Keep asking question while we don't have an acceptable answer
     while True:
         # Print the question
         print(question)
 
         # Print the options
-        if isinstance(constraints, enum.EnumType):
-            # If the constraint is an EnumType we iterate through the values
-            for i in constraints:
-                print(f"{i.value}: {i.name}")
-        elif isinstance(constraints, list):
-            # If the constraint is a list of entries, iterate through each entry
-            for i in range(len(constraints)):
-                # If the entry is a value of an Enum class, we print its name
-                if isinstance(constraints[i], enum.Enum):
-                    print(f"{i}: {constraints[i].name}")
-                else:
-                    # Otherwise we treat it as a string and print its value
-                    print(f"{i}: {constraints[i]}")
-
+        for i in range(len(options)):
+            print(f"{i}: {options[i][0]}")
 
         # Wait for input
         answer = input()
 
         # Validate input as per constraints
-        if isinstance(constraints, enum.EnumType):
-            # Check if the input is a number we can use as an index
-            if answer.isdigit() and int(answer) in constraints._value2member_map_:
-                return constraints(int(answer))
-            # Check if the string matches
-            elif answer.title().replace(" ", "_") in constraints._member_names_:
-                return constraints[answer.title().replace(" ", "_")]
-        elif isinstance(constraints, list):
-            if answer.isdigit() and int(answer) < len(constraints):
-                return constraints[int(answer)]
-            else:
-                for option in constraints:
-                    if isinstance(option, str) and answer.lower() == option.lower():
-                        return option
-                    elif isinstance(option, enum.Enum) and answer.lower().replace(" ", "_") == option.name.lower():
-                        return option
+        if answer.isdigit() and int(answer) < len(options):
+            return options[int(answer)][1]
+        else:
+            for o in options:
+                if answer.lower() == o[0].lower():
+                    return o[1]
 
 # Run Project
 #All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use.
