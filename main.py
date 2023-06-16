@@ -18,17 +18,21 @@ def createcharacter():
     character = DnDCharacter(name, race, classtype, background, align)
     match classtype:
         case DnDClass.Barbarian:
-            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total",[DnDSkills.Animal_handling, DnDSkills.Athletics, DnDSkills.Intimidation, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Survival])
-            skillprof2 = make_decision("Select another skill",[DnDSkills.Animal_handling, DnDSkills.Athletics, DnDSkills.Intimidation, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Survival])
-            weapon1 = make_decision("Select a weapon", [DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip])
-            weapon2 = make_decision("Select another weapon. If you choose Handaxe, you get 2 of them.", [DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear])
+            barbarian_skills = [DnDSkills.Animal_handling, DnDSkills.Athletics, DnDSkills.Intimidation, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Survival]
+            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total", barbarian_skills)
+            skillprof2 = make_decision("Select another skill",[i for i in barbarian_skills if i != skillprof1])
+            weapon1 = make_decision("Select a weapon", [DnDMartialWeapons])
+            weapon2 = make_decision("Select another weapon. If you choose Handaxe, you get 2 of them.", [DnDSimpleWeapons])
+            if weapon2 == DnDSimpleWeapons.Handaxe:
+                weapon2 = (2, DnDSimpleWeapons.Handaxe)
             character.inventory += [DnDEquipmentPacks.Explorers_pack]
-            character.weapons += [weapon1, weapon2, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin]
+            character.weapons += [weapon1, weapon2, (4, DnDSimpleWeapons.Javelin)]
             character.proficiencies += [skillprof1, skillprof2]
 
         case DnDClass.Wizard:
-            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
-            skillprof2 = make_decision("Select another skill", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
+            wizard_skills = [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion]
+            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total", wizard_skills)
+            skillprof2 = make_decision("Select another skill", [i for i in wizard_skills if i != skillprof1])
             weapon = make_decision("Select a weapon", [DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Dagger])
             magic_item = make_decision("Select a magic item", [DnDItems.Component_Pouch, DnDItems.Orb, DnDItems.Rod, DnDItems.Wand, DnDItems.Staff, DnDItems.Crystal])
             pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_pack, DnDEquipmentPacks.Explorers_pack])
