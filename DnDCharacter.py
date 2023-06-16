@@ -260,8 +260,6 @@ class DnDCharacter:
                 self.HP = 12
                 self.prof_bonus = 2
                 self.proficiencies += [DnDLightArmour.Padded_armour, DnDLightArmour.Leather_armour, DnDLightArmour.Studded_leather_armour, DnDMediumArmour.Hide_armour, DnDMediumArmour.Spiked_armour, DnDMediumArmour.Scale_mail_armour, DnDMediumArmour.Halfplate, DnDMediumArmour.Breastplate, DnDMediumArmour.Chain_shirt, DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear, DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip, DnDAttributes.Strength, DnDAttributes.Constitution, DnDShields.Shield]
-                #choose 2 from list
-
 
 
             #Bard Conditions
@@ -349,7 +347,6 @@ class DnDCharacter:
                 self.HP = 6
                 self.prof_bonus = 2
                 self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDAttributes.Intelligence, DnDAttributes.Wisdom]
-                #2 skills from list
 
     #Race Conditions
     def set_race(self, race: DnDRace):

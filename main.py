@@ -21,6 +21,15 @@ def createcharacter():
     align = convert_to_dnd_alignment(align)
     character = DnDCharacter(name, race, classtype, background, align)
     match classtype:
+        case DnDClass.Barbarian:
+            skillprof1 = make_decision("Select a skill (you will need to choose 2 in total",[DnDSkills.Animal_handling, DnDSkills.Athletics, DnDSkills.Intimidation, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Survival])
+            skillprof2 = make_decision("Select another skill",[DnDSkills.Animal_handling, DnDSkills.Athletics, DnDSkills.Intimidation, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Survival])
+            weapon1 = make_decision("Select a weapon", [DnDMartialWeapons.Battleaxe, DnDMartialWeapons.Flail, DnDMartialWeapons.Glaive, DnDMartialWeapons.Greataxe, DnDMartialWeapons.Greatsword, DnDMartialWeapons.Halberd, DnDMartialWeapons.Lance, DnDMartialWeapons.Longsword, DnDMartialWeapons.Maul, DnDMartialWeapons.Morningstar, DnDMartialWeapons.Pike, DnDMartialWeapons.Rapier, DnDMartialWeapons.Scimitar, DnDMartialWeapons.Shortsword, DnDMartialWeapons.Trident, DnDMartialWeapons.War_pick, DnDMartialWeapons.Warhammer, DnDMartialWeapons.Whip])
+            weapon2 = make_decision("Select another weapon. If you choose Handaxe, you get 2 of them.", [DnDSimpleWeapons.Club, DnDSimpleWeapons.Dagger, DnDSimpleWeapons.Greatclub, DnDSimpleWeapons.Handaxe, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Light_hammer, DnDSimpleWeapons.Mace, DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Sickle, DnDSimpleWeapons.Spear])
+            character.inventory += [DnDEquipmentPacks.Explorers_pack]
+            character.weapons += [weapon1, weapon2, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin]
+            character.proficiencies += [skillprof1, skillprof2]
+
         case DnDClass.Wizard:
             skillprof1 = make_decision("Select a skill (you will need to choose 2 in total", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
             skillprof2 = make_decision("Select another skill", [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Insight, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Religion])
