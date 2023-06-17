@@ -218,6 +218,9 @@ def make_string(input):
 
 # View Character by characteristics:
 def viewcharacter(character):
+    if character == None:
+        print("No characters to view")
+        return
     print(f"Race = {character.race.name}")
     print(f'Size = {character.size}')
     print(f'Speed = {character.speed}')
