@@ -10,6 +10,7 @@ class DnDItemType(Enum):
     Arcane_Focus = auto()
     Druidic_Focus = auto()
     Holy_Symbols = auto()
+    Instrument = auto()
 
 
 class DnDItemObject:
@@ -30,7 +31,7 @@ class DnDContainerObject:
         self.description = description
 
 
-class DnDItem(Enum):
+class DnDEquipmentPacks(Enum):
     Burglars_Pack = auto()
     Diplomats_Pack = auto()
     Dungeoneers_Pack = auto()
@@ -38,6 +39,9 @@ class DnDItem(Enum):
     Explorers_Pack = auto()
     Priests_Pack = auto()
     Scholars_Pack = auto()
+
+
+class DnDCommonItems(Enum):
     Abacus = auto()
     Bedroll = auto()
     Bell = auto()
@@ -77,6 +81,9 @@ class DnDItem(Enum):
     Spyglass = auto()
     Tent = auto()
     Whetstone = auto()
+
+
+class DnDUsableItems(Enum):
     Acid_Vial = auto()
     Alchemists_Fire_Flask = auto()
     Antitoxin = auto()
@@ -95,148 +102,183 @@ class DnDItem(Enum):
     Potion_of_Healing = auto()
     Tinderbox = auto()
     Torch = auto()
+
+
+class DnDClothes(Enum):
     Common_Clothes = auto()
     Costume = auto()
     Fine_Clothes = auto()
     Robes = auto()
     Travelers_Clothes = auto()
+
+
+class DnDArcaneFocus(Enum):
     Crystal = auto()
     Orb = auto()
     Rod = auto()
     Staff = auto()
     Wand = auto()
+
+
+class DnDDruidicFocus(Enum):
     Sprig_of_Mistletoe = auto()
     Totem = auto()
     Wooden_Staff = auto()
     Yew_Wand = auto()
+
+
+class DnDHolySymbol(Enum):
     Amulet = auto()
     Emblem = auto()
     Reliquary = auto()
 
 
-dnd_items = {
-    DnDItem.Burglars_Pack: DnDItemObject("Burglar's Pack", DnDItemType.Equipment_Pack, "16 gp", None,
-                                         "Backpack, a bag of 1,000 ball bearings, 10 feet of string, a bell, 5 candles, a crowbar, a hammer, 10 pitons, a hooded lantern, 2 flasks of oil, 5 days rations, a tinderbox and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
-    DnDItem.Diplomats_Pack: DnDItemObject("Diplomat's Pack", DnDItemType.Equipment_Pack, "39 gp", None,
-                                          "Chest, 2 cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, 2 flasks of oil, 5 sheets of paper, a vial of perfume, sealing wax, and soap."),
-    DnDItem.Dungeoneers_Pack: DnDItemObject("Dungeoneer's Pack", DnDItemType.Equipment_Pack, "12 gp", None,
-                                            "Backpack, a crowbar, a hammer, 10 pitons, 10 torches, a tinderbox, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
-    DnDItem.Entertainers_Pack: DnDItemObject("Entertainer's Pack", DnDItemType.Equipment_Pack, "40 gp", None,
-                                             "Backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit."),
-    DnDItem.Explorers_Pack: DnDItemObject("Explorer's Pack", DnDItemType.Equipment_Pack, "10 gp", None,
-                                          "Backpack, a bedroll, a mess kit, a tinderbox, 10 torches, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
-    DnDItem.Priests_Pack: DnDItemObject("Priest's Pack", DnDItemType.Equipment_Pack, "19 gp", None,
-                                        "Backpack, a blanket, 10 candles, a tinderbox, an alms box, 2 blocks of incense, a censer, vestments, 2 days of rations, and a waterskin."),
-    DnDItem.Scholars_Pack: DnDItemObject("Scholar's Pack", DnDItemType.Equipment_Pack, "40 gp", None,
-                                         "Backpack, a book of lore, a bottle of ink, an ink pen, 10 sheets of parchment, a little bag of sand, and a small knife."),
-    DnDItem.Abacus: DnDItemObject("Abacus", DnDItemType.Common_Item, "2 gp", "2 lb.", ""),
-    DnDItem.Bedroll: DnDItemObject("Bedroll", DnDItemType.Common_Item, "1 gp", "2 lb.", ""),
-    DnDItem.Bell: DnDItemObject("Bell", DnDItemType.Common_Item, "1 gp", None, ""),
-    DnDItem.Blanket: DnDItemObject("Blanket", DnDItemType.Common_Item, "5 sp", "5 lb.", ""),
-    DnDItem.Block_and_Tackle: DnDItemObject("Block and Tackle", DnDItemType.Common_Item, "1 gp", "5 lb.",
-                                            "A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift."),
-    DnDItem.Book: DnDItemObject("Book", DnDItemType.Common_Item, "25 gp", "5 lb.",
-                                "A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented sing text or pictures. A book of spells is a spellbook."),
-    DnDItem.Candle: DnDItemObject("Candle", DnDItemType.Common_Item, "1 cp", None,
-                                  "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for another 5 feet."),
-    DnDItem.Chain: DnDItemObject("Chain (10 ft)", DnDItemType.Common_Item, "5 gp", "10 lb.",
-                                 "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check."),
-    DnDItem.Chalk: DnDItemObject("Chalk (1 pc)", DnDItemType.Common_Item, "1 cp", None, ""),
-    DnDItem.Component_Pouch: DnDItemObject("Component Pouch", DnDItemType.Common_Item, "25 gp", "2 lb.",
-                                           "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description)."),
-    DnDItem.Fishing_Tackle: DnDItemObject("Fishing Tackle", DnDItemType.Common_Item, "1 gp", "4 lb.",
-                                          "This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting."),
-    DnDItem.Grappling_Hook: DnDItemObject("Grappling Hook", DnDItemType.Common_Item, "2 gp", "4 lb.", ""),
-    DnDItem.Hammer: DnDItemObject("Hammer", DnDItemType.Common_Item, "1 gp", "3 lb.", ""),
-    DnDItem.Hourglass: DnDItemObject("Hourglass", DnDItemType.Common_Item, "25 gp", "1 lb.", ""),
-    DnDItem.Ink: DnDItemObject("Ink (1 oz)", DnDItemType.Common_Item, "10 gp", None, ""),
-    DnDItem.Ink_Pen: DnDItemObject("Ink Pen", DnDItemType.Common_Item, "2 cp", None, ""),
-    DnDItem.Ladder: DnDItemObject("Ladder (10 ft)", DnDItemType.Common_Item, "1 sp", "25 lb.", ""),
-    DnDItem.Lock: DnDItemObject("Lock", DnDItemType.Common_Item, "10 gp", "1 lb.",
-                                "A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your DM may decide that better locks are available for higher prices."),
-    DnDItem.Magnifying_Glass: DnDItemObject("Magnifying Glass", DnDItemType.Common_Item, "100 gp", None,
-                                            "This lens allows a closer look at small objects. It is also useful as a substitute or flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite. A magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed."),
-    DnDItem.Mess_Kit: DnDItemObject("Mess Kit", DnDItemType.Common_Item, "2 sp", "1 lb.",
-                                    "This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl."),
-    DnDItem.Miners_Pick: DnDItemObject("Miner's Pick", DnDItemType.Common_Item, "2 gp", "10 lb.", ""),
-    DnDItem.Paper: DnDItemObject("Paper (1 pc)", DnDItemType.Common_Item, "2 sp", None, ""),
-    DnDItem.Parchment: DnDItemObject("Parchment (1 sheet)", DnDItemType.Common_Item, "1 sp", None, ""),
-    DnDItem.Perfume: DnDItemObject("Perfume (vial)", DnDItemType.Common_Item, "5 gp", None, ""),
-    DnDItem.Piton: DnDItemObject("Piton", DnDItemType.Common_Item, "5 cp", "0.25 lb.", ""),
-    DnDItem.Pole: DnDItemObject("Pole (10 ft)", DnDItemType.Common_Item, "5 cp", "7 lb.", ""),
-    DnDItem.Rations: DnDItemObject("Rations (1 day)", DnDItemType.Common_Item, "5 sp", "2 lb.",
-                                   "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts."),
-    DnDItem.Rope_Hemp: DnDItemObject("Rope - Hemp (50 ft)", DnDItemType.Common_Item, "1 gp", "10 lb.",
-                                     "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."),
-    DnDItem.Rope_Silk: DnDItemObject("Rope - Silk (50 ft)", DnDItemType.Common_Item, "10 gp", "5 lb.",
-                                     "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."),
-    DnDItem.Sealing_Wax: DnDItemObject("Sealing Wax", DnDItemType.Common_Item, "5 sp", None, ""),
-    DnDItem.Shovel: DnDItemObject("Shovel", DnDItemType.Common_Item, "2 gp", "5 lb.", ""),
-    DnDItem.Signal_Whistle: DnDItemObject("Signal Whistle", DnDItemType.Common_Item, "5 cp", None, ""),
-    DnDItem.Signet_Ring: DnDItemObject("Signet Ring", DnDItemType.Common_Item, "5 gp", None, ""),
-    DnDItem.Sledgehammer: DnDItemObject("Sledgehammer", DnDItemType.Common_Item, "2 gp", "10 lb.", ""),
-    DnDItem.Spellbook: DnDItemObject("Spellbook", DnDItemType.Common_Item, "50 gp", "3 lb.",
-                                     "Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells."),
-    DnDItem.Iron_Spikes: DnDItemObject("Spikes - Iron (10)", DnDItemType.Common_Item, "1 gp", "5 lb.", ""),
-    DnDItem.Spyglass: DnDItemObject("Spyglass", DnDItemType.Common_Item, "1000 gp", "1 lb.",
-                                    "Objects viewed through a spyglass are magnified to twice their size."),
-    DnDItem.Tent: DnDItemObject("Tent - 2 person", DnDItemType.Common_Item, "2 gp", "20 lbs.", ""),
-    DnDItem.Whetstone: DnDItemObject("Whetstone", DnDItemType.Common_Item, "1 cp", "1 lb.", ""),
-    DnDItem.Acid_Vial: DnDItemObject("Acid (vial)", DnDItemType.Usable_Items, "25 gp", "1 lb.",
-                                     "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage."),
-    DnDItem.Alchemists_Fire_Flask: DnDItemObject("Alchemist's Fire (flask)", DnDItemType.Usable_Items, "50 gp", "1 lb.",
-                                                 "This sticky, adhesive fluid ignites when exposed to air. As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon. On a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames."),
-    DnDItem.Antitoxin: DnDItemObject("Antitoxin (vial)", DnDItemType.Usable_Items, "50 gp", None,
-                                     "A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefits to undead or constructs."),
-    DnDItem.Ball_Bearings: DnDItemObject("Ball Bearings (bag of 1,000)", DnDItemType.Usable_Items, "1 gp", "2 lb.",
-                                         "As an action, you can spill these tiny balls from their pouch to cover a level area 10 feet square. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or all prone. A creature moving through the area at half speed doesn't need to make the saving throw."),
-    DnDItem.Caltrops: DnDItemObject("Caltrops (bag of 20)", DnDItemType.Usable_Items, "1 gp", "2 lb.",
-                                    "As an action, you can spread a single bag of caltrops to cover a 5-foot-square area. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Until the creature regains at least 1 hit point, its walking speed is reduced by 10 feet. A creature moving through the area at half speed doesn't need to make the saving throw."),
-    DnDItem.Climbers_Kit: DnDItemObject("Climber's Kit", DnDItemType.Usable_Items, "25 gp", "12 lb.",
-                                        "A climber's kit includes special pitons, boot tips, gloves, and a harness. You can use the climber's kit as an action to anchor yourself; when you do, you can't fall more than 25 feet from the point where you anchored yourself, and you can't climb more than 25 feet away from that point without undoing the anchor."),
-    DnDItem.Crowbar: DnDItemObject("Crowbar", DnDItemType.Usable_Items, "2 gp", "5 lb.",
-                                   "Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied."),
-    DnDItem.Healers_Kit: DnDItemObject("Healer's Kit", DnDItemType.Usable_Items, "5 gp", "3 lb.",
-                                       "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check."),
-    DnDItem.Holy_Water_Flask: DnDItemObject("Holy Water (flask)", DnDItemType.Usable_Items, "25 gp", "1 lb.",
-                                            "As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon. If the target is a fiend or undead, it takes 2d6 radiant damage. A cleric or paladin may create holy water by performing a special ritual. The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot."),
-    DnDItem.Hunting_Trap: DnDItemObject("Hunting Trap", DnDItemType.Usable_Items, "5 gp", "25 lb.",
-                                        "When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature."),
-    DnDItem.Lamp: DnDItemObject("Lamp", DnDItemType.Usable_Items, "5 sp", "1 lb.",
-                                "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."),
-    DnDItem.Bullseye_Lantern: DnDItemObject("Lantern - Bullseye", DnDItemType.Usable_Items, "10 gp", "2 lb.",
-                                            "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."),
-    DnDItem.Hooded_Lantern: DnDItemObject("Lantern - Hooded", DnDItemType.Usable_Items, "5 gp", "2 lb.",
-                                          "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius."),
-    DnDItem.Oil_Flask: DnDItemObject("Oil (flask)", DnDItemType.Usable_Items, "1 sp", "1 lb.",
-                                     "Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. if lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn."),
-    DnDItem.Basic_Poison_Vial: DnDItemObject("Poison, basic (vial)", DnDItemType.Usable_Items, "100 gp", None,
-                                             "You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying."),
-    DnDItem.Potion_of_Healing: DnDItemObject("Potion of Healing (common)", DnDItemType.Usable_Items, "50 gp", "0.5 lb.",
-                                             ""),
-    DnDItem.Tinderbox: DnDItemObject("Tinderbox", DnDItemType.Usable_Items, "5 sp", "1 lb.",
-                                     "This small container holds flint, fire steel, an tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch — or anything else with abundant, exposed fuel — takes an action. Lighting any other fire takes 1 minutes."),
-    DnDItem.Torch: DnDItemObject("Torch", DnDItemType.Usable_Items, "1 cp", "1 lb.",
-                                 "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage."),
-    DnDItem.Common_Clothes: DnDItemObject("Common Clothes", DnDItemType.Clothes, "5 sp", "3 lb.", ""),
-    DnDItem.Costume: DnDItemObject("Costume", DnDItemType.Clothes, "5 gp", "4 lb.", ""),
-    DnDItem.Fine_Clothes: DnDItemObject("Fine Clothes", DnDItemType.Clothes, "15 gp", "6 lb.", ""),
-    DnDItem.Robes: DnDItemObject("Robes", DnDItemType.Clothes, "1 gp", "4 lb.", ""),
-    DnDItem.Travelers_Clothes: DnDItemObject("Traveler's Clothes", DnDItemType.Clothes, "2 gp", "4 lb.", ""),
-    DnDItem.Crystal: DnDItemObject("Crystal", DnDItemType.Arcane_Focus, "10 gp", "1 lb.", ""),
-    DnDItem.Orb: DnDItemObject("Orb", DnDItemType.Arcane_Focus, "20 gp", "3 lb.", ""),
-    DnDItem.Rod: DnDItemObject("Rod", DnDItemType.Arcane_Focus, "10 gp", "2 lb.", ""),
-    DnDItem.Staff: DnDItemObject("Staff", DnDItemType.Arcane_Focus, "5 gp", "4 lb.", ""),
-    DnDItem.Wand: DnDItemObject("Wand", DnDItemType.Arcane_Focus, "10 gp", "1 lb.", ""),
-    DnDItem.Sprig_of_Mistletoe: DnDItemObject("Sprig of Mistletoe", DnDItemType.Druidic_Focus, "1 gp", None, ""),
-    DnDItem.Totem: DnDItemObject("Totem", DnDItemType.Druidic_Focus, "1 gp", None, ""),
-    DnDItem.Wooden_Staff: DnDItemObject("Wooden Staff", DnDItemType.Druidic_Focus, "5 gp", "4 lb.", ""),
-    DnDItem.Yew_Wand: DnDItemObject("Yew Wand", DnDItemType.Druidic_Focus, "10 gp", "1 lb.", ""),
-    DnDItem.Amulet: DnDItemObject("Amulet", DnDItemType.Holy_Symbols, "5 gp", "1 lb.", ""),
-    DnDItem.Emblem: DnDItemObject("Emblem", DnDItemType.Holy_Symbols, "5 gp", None, ""),
-    DnDItem.Reliquary: DnDItemObject("Reliquary", DnDItemType.Holy_Symbols, "5 gp", "2 lb.", ""),
-}
+class DnDMusicalInstruments(Enum):
+    Bagpipes = auto()
+    Drum = auto()
+    Dulcimer = auto()
+    Flute = auto()
+    Lute = auto()
+    Lyre = auto()
+    Horn = auto()
+    Pan_flute = auto()
+    Shawm = auto()
+    Viol = auto()
 
+
+
+dnd_items = {
+    DnDEquipmentPacks.Burglars_Pack: DnDItemObject("Burglar's Pack", DnDItemType.Equipment_Pack, "16 gp", None,
+                                         "Backpack, a bag of 1,000 ball bearings, 10 feet of string, a bell, 5 candles, a crowbar, a hammer, 10 pitons, a hooded lantern, 2 flasks of oil, 5 days rations, a tinderbox and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
+    DnDEquipmentPacks.Diplomats_Pack: DnDItemObject("Diplomat's Pack", DnDItemType.Equipment_Pack, "39 gp", None,
+                                          "Chest, 2 cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, 2 flasks of oil, 5 sheets of paper, a vial of perfume, sealing wax, and soap."),
+    DnDEquipmentPacks.Dungeoneers_Pack: DnDItemObject("Dungeoneer's Pack", DnDItemType.Equipment_Pack, "12 gp", None,
+                                            "Backpack, a crowbar, a hammer, 10 pitons, 10 torches, a tinderbox, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
+    DnDEquipmentPacks.Entertainers_Pack: DnDItemObject("Entertainer's Pack", DnDItemType.Equipment_Pack, "40 gp", None,
+                                             "Backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit."),
+    DnDEquipmentPacks.Explorers_Pack: DnDItemObject("Explorer's Pack", DnDItemType.Equipment_Pack, "10 gp", None,
+                                          "Backpack, a bedroll, a mess kit, a tinderbox, 10 torches, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it."),
+    DnDEquipmentPacks.Priests_Pack: DnDItemObject("Priest's Pack", DnDItemType.Equipment_Pack, "19 gp", None,
+                                        "Backpack, a blanket, 10 candles, a tinderbox, an alms box, 2 blocks of incense, a censer, vestments, 2 days of rations, and a waterskin."),
+    DnDEquipmentPacks.Scholars_Pack: DnDItemObject("Scholar's Pack", DnDItemType.Equipment_Pack, "40 gp", None,
+                                         "Backpack, a book of lore, a bottle of ink, an ink pen, 10 sheets of parchment, a little bag of sand, and a small knife."),
+    DnDCommonItems.Abacus: DnDItemObject("Abacus", DnDItemType.Common_Item, "2 gp", "2 lb.", ""),
+    DnDCommonItems.Bedroll: DnDItemObject("Bedroll", DnDItemType.Common_Item, "1 gp", "2 lb.", ""),
+    DnDCommonItems.Bell: DnDItemObject("Bell", DnDItemType.Common_Item, "1 gp", None, ""),
+    DnDCommonItems.Blanket: DnDItemObject("Blanket", DnDItemType.Common_Item, "5 sp", "5 lb.", ""),
+    DnDCommonItems.Block_and_Tackle: DnDItemObject("Block and Tackle", DnDItemType.Common_Item, "1 gp", "5 lb.",
+                                            "A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift."),
+    DnDCommonItems.Book: DnDItemObject("Book", DnDItemType.Common_Item, "25 gp", "5 lb.",
+                                "A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented sing text or pictures. A book of spells is a spellbook."),
+    DnDCommonItems.Candle: DnDItemObject("Candle", DnDItemType.Common_Item, "1 cp", None,
+                                  "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for another 5 feet."),
+    DnDCommonItems.Chain: DnDItemObject("Chain (10 ft)", DnDItemType.Common_Item, "5 gp", "10 lb.",
+                                 "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check."),
+    DnDCommonItems.Chalk: DnDItemObject("Chalk (1 pc)", DnDItemType.Common_Item, "1 cp", None, ""),
+    DnDCommonItems.Component_Pouch: DnDItemObject("Component Pouch", DnDItemType.Common_Item, "25 gp", "2 lb.",
+                                           "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description)."),
+    DnDCommonItems.Fishing_Tackle: DnDItemObject("Fishing Tackle", DnDItemType.Common_Item, "1 gp", "4 lb.",
+                                          "This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting."),
+    DnDCommonItems.Grappling_Hook: DnDItemObject("Grappling Hook", DnDItemType.Common_Item, "2 gp", "4 lb.", ""),
+    DnDCommonItems.Hammer: DnDItemObject("Hammer", DnDItemType.Common_Item, "1 gp", "3 lb.", ""),
+    DnDCommonItems.Hourglass: DnDItemObject("Hourglass", DnDItemType.Common_Item, "25 gp", "1 lb.", ""),
+    DnDCommonItems.Ink: DnDItemObject("Ink (1 oz)", DnDItemType.Common_Item, "10 gp", None, ""),
+    DnDCommonItems.Ink_Pen: DnDItemObject("Ink Pen", DnDItemType.Common_Item, "2 cp", None, ""),
+    DnDCommonItems.Ladder: DnDItemObject("Ladder (10 ft)", DnDItemType.Common_Item, "1 sp", "25 lb.", ""),
+    DnDCommonItems.Lock: DnDItemObject("Lock", DnDItemType.Common_Item, "10 gp", "1 lb.",
+                                "A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your DM may decide that better locks are available for higher prices."),
+    DnDCommonItems.Magnifying_Glass: DnDItemObject("Magnifying Glass", DnDItemType.Common_Item, "100 gp", None,
+                                            "This lens allows a closer look at small objects. It is also useful as a substitute or flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite. A magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed."),
+    DnDCommonItems.Mess_Kit: DnDItemObject("Mess Kit", DnDItemType.Common_Item, "2 sp", "1 lb.",
+                                    "This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl."),
+    DnDCommonItems.Miners_Pick: DnDItemObject("Miner's Pick", DnDItemType.Common_Item, "2 gp", "10 lb.", ""),
+    DnDCommonItems.Paper: DnDItemObject("Paper (1 pc)", DnDItemType.Common_Item, "2 sp", None, ""),
+    DnDCommonItems.Parchment: DnDItemObject("Parchment (1 sheet)", DnDItemType.Common_Item, "1 sp", None, ""),
+    DnDCommonItems.Perfume: DnDItemObject("Perfume (vial)", DnDItemType.Common_Item, "5 gp", None, ""),
+    DnDCommonItems.Piton: DnDItemObject("Piton", DnDItemType.Common_Item, "5 cp", "0.25 lb.", ""),
+    DnDCommonItems.Pole: DnDItemObject("Pole (10 ft)", DnDItemType.Common_Item, "5 cp", "7 lb.", ""),
+    DnDCommonItems.Rations: DnDItemObject("Rations (1 day)", DnDItemType.Common_Item, "5 sp", "2 lb.",
+                                   "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts."),
+    DnDCommonItems.Rope_Hemp: DnDItemObject("Rope - Hemp (50 ft)", DnDItemType.Common_Item, "1 gp", "10 lb.",
+                                     "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."),
+    DnDCommonItems.Rope_Silk: DnDItemObject("Rope - Silk (50 ft)", DnDItemType.Common_Item, "10 gp", "5 lb.",
+                                     "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."),
+    DnDCommonItems.Sealing_Wax: DnDItemObject("Sealing Wax", DnDItemType.Common_Item, "5 sp", None, ""),
+    DnDCommonItems.Shovel: DnDItemObject("Shovel", DnDItemType.Common_Item, "2 gp", "5 lb.", ""),
+    DnDCommonItems.Signal_Whistle: DnDItemObject("Signal Whistle", DnDItemType.Common_Item, "5 cp", None, ""),
+    DnDCommonItems.Signet_Ring: DnDItemObject("Signet Ring", DnDItemType.Common_Item, "5 gp", None, ""),
+    DnDCommonItems.Sledgehammer: DnDItemObject("Sledgehammer", DnDItemType.Common_Item, "2 gp", "10 lb.", ""),
+    DnDCommonItems.Spellbook: DnDItemObject("Spellbook", DnDItemType.Common_Item, "50 gp", "3 lb.",
+                                     "Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells."),
+    DnDCommonItems.Iron_Spikes: DnDItemObject("Spikes - Iron (10)", DnDItemType.Common_Item, "1 gp", "5 lb.", ""),
+    DnDCommonItems.Spyglass: DnDItemObject("Spyglass", DnDItemType.Common_Item, "1000 gp", "1 lb.",
+                                    "Objects viewed through a spyglass are magnified to twice their size."),
+    DnDCommonItems.Tent: DnDItemObject("Tent - 2 person", DnDItemType.Common_Item, "2 gp", "20 lbs.", ""),
+    DnDCommonItems.Whetstone: DnDItemObject("Whetstone", DnDItemType.Common_Item, "1 cp", "1 lb.", ""),
+    DnDUsableItems.Acid_Vial: DnDItemObject("Acid (vial)", DnDItemType.Usable_Items, "25 gp", "1 lb.",
+                                     "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage."),
+    DnDUsableItems.Alchemists_Fire_Flask: DnDItemObject("Alchemist's Fire (flask)", DnDItemType.Usable_Items, "50 gp", "1 lb.",
+                                                 "This sticky, adhesive fluid ignites when exposed to air. As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon. On a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames."),
+    DnDUsableItems.Antitoxin: DnDItemObject("Antitoxin (vial)", DnDItemType.Usable_Items, "50 gp", None,
+                                     "A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefits to undead or constructs."),
+    DnDUsableItems.Ball_Bearings: DnDItemObject("Ball Bearings (bag of 1,000)", DnDItemType.Usable_Items, "1 gp", "2 lb.",
+                                         "As an action, you can spill these tiny balls from their pouch to cover a level area 10 feet square. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or all prone. A creature moving through the area at half speed doesn't need to make the saving throw."),
+    DnDUsableItems.Caltrops: DnDItemObject("Caltrops (bag of 20)", DnDItemType.Usable_Items, "1 gp", "2 lb.",
+                                    "As an action, you can spread a single bag of caltrops to cover a 5-foot-square area. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Until the creature regains at least 1 hit point, its walking speed is reduced by 10 feet. A creature moving through the area at half speed doesn't need to make the saving throw."),
+    DnDUsableItems.Climbers_Kit: DnDItemObject("Climber's Kit", DnDItemType.Usable_Items, "25 gp", "12 lb.",
+                                        "A climber's kit includes special pitons, boot tips, gloves, and a harness. You can use the climber's kit as an action to anchor yourself; when you do, you can't fall more than 25 feet from the point where you anchored yourself, and you can't climb more than 25 feet away from that point without undoing the anchor."),
+    DnDUsableItems.Crowbar: DnDItemObject("Crowbar", DnDItemType.Usable_Items, "2 gp", "5 lb.",
+                                   "Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied."),
+    DnDUsableItems.Healers_Kit: DnDItemObject("Healer's Kit", DnDItemType.Usable_Items, "5 gp", "3 lb.",
+                                       "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check."),
+    DnDUsableItems.Holy_Water_Flask: DnDItemObject("Holy Water (flask)", DnDItemType.Usable_Items, "25 gp", "1 lb.",
+                                            "As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon. If the target is a fiend or undead, it takes 2d6 radiant damage. A cleric or paladin may create holy water by performing a special ritual. The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot."),
+    DnDUsableItems.Hunting_Trap: DnDItemObject("Hunting Trap", DnDItemType.Usable_Items, "5 gp", "25 lb.",
+                                        "When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature."),
+    DnDUsableItems.Lamp: DnDItemObject("Lamp", DnDItemType.Usable_Items, "5 sp", "1 lb.",
+                                "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."),
+    DnDUsableItems.Bullseye_Lantern: DnDItemObject("Lantern - Bullseye", DnDItemType.Usable_Items, "10 gp", "2 lb.",
+                                            "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."),
+    DnDUsableItems.Hooded_Lantern: DnDItemObject("Lantern - Hooded", DnDItemType.Usable_Items, "5 gp", "2 lb.",
+                                          "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius."),
+    DnDUsableItems.Oil_Flask: DnDItemObject("Oil (flask)", DnDItemType.Usable_Items, "1 sp", "1 lb.",
+                                     "Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. if lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn."),
+    DnDUsableItems.Basic_Poison_Vial: DnDItemObject("Poison, basic (vial)", DnDItemType.Usable_Items, "100 gp", None,
+                                             "You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying."),
+    DnDUsableItems.Potion_of_Healing: DnDItemObject("Potion of Healing (common)", DnDItemType.Usable_Items, "50 gp", "0.5 lb.",
+                                             ""),
+    DnDUsableItems.Tinderbox: DnDItemObject("Tinderbox", DnDItemType.Usable_Items, "5 sp", "1 lb.",
+                                     "This small container holds flint, fire steel, an tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch — or anything else with abundant, exposed fuel — takes an action. Lighting any other fire takes 1 minutes."),
+    DnDUsableItems.Torch: DnDItemObject("Torch", DnDItemType.Usable_Items, "1 cp", "1 lb.",
+                                 "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage."),
+    DnDClothes.Common_Clothes: DnDItemObject("Common Clothes", DnDItemType.Clothes, "5 sp", "3 lb.", ""),
+    DnDClothes.Costume: DnDItemObject("Costume", DnDItemType.Clothes, "5 gp", "4 lb.", ""),
+    DnDClothes.Fine_Clothes: DnDItemObject("Fine Clothes", DnDItemType.Clothes, "15 gp", "6 lb.", ""),
+    DnDClothes.Robes: DnDItemObject("Robes", DnDItemType.Clothes, "1 gp", "4 lb.", ""),
+    DnDClothes.Travelers_Clothes: DnDItemObject("Traveler's Clothes", DnDItemType.Clothes, "2 gp", "4 lb.", ""),
+    DnDArcaneFocus.Crystal: DnDItemObject("Crystal", DnDItemType.Arcane_Focus, "10 gp", "1 lb.", ""),
+    DnDArcaneFocus.Orb: DnDItemObject("Orb", DnDItemType.Arcane_Focus, "20 gp", "3 lb.", ""),
+    DnDArcaneFocus.Rod: DnDItemObject("Rod", DnDItemType.Arcane_Focus, "10 gp", "2 lb.", ""),
+    DnDArcaneFocus.Staff: DnDItemObject("Staff", DnDItemType.Arcane_Focus, "5 gp", "4 lb.", ""),
+    DnDArcaneFocus.Wand: DnDItemObject("Wand", DnDItemType.Arcane_Focus, "10 gp", "1 lb.", ""),
+    DnDDruidicFocus.Sprig_of_Mistletoe: DnDItemObject("Sprig of Mistletoe", DnDItemType.Druidic_Focus, "1 gp", None, ""),
+    DnDDruidicFocus.Totem: DnDItemObject("Totem", DnDItemType.Druidic_Focus, "1 gp", None, ""),
+    DnDDruidicFocus.Wooden_Staff: DnDItemObject("Wooden Staff", DnDItemType.Druidic_Focus, "5 gp", "4 lb.", ""),
+    DnDDruidicFocus.Yew_Wand: DnDItemObject("Yew Wand", DnDItemType.Druidic_Focus, "10 gp", "1 lb.", ""),
+    DnDHolySymbol.Amulet: DnDItemObject("Amulet", DnDItemType.Holy_Symbols, "5 gp", "1 lb.", ""),
+    DnDHolySymbol.Emblem: DnDItemObject("Emblem", DnDItemType.Holy_Symbols, "5 gp", None, ""),
+    DnDHolySymbol.Reliquary: DnDItemObject("Reliquary", DnDItemType.Holy_Symbols, "5 gp", "2 lb.", ""),
+    DnDMusicalInstruments.Bagpipes: DnDItemObject("Bagpipes", DnDItemType.Instrument, "30 gp", "6 lb.", ""),
+    DnDMusicalInstruments.Drum: DnDItemObject("Drum", DnDItemType.Instrument, "6 gp", "3 lb.", ""),
+    DnDMusicalInstruments.Dulcimer: DnDItemObject("Dulcimer", DnDItemType.Instrument, "25 gp", "10 lb.", ""),
+    DnDMusicalInstruments.Flute: DnDItemObject("Flute", DnDItemType.Instrument, "2 gp", "1 lb.", ""),
+    DnDMusicalInstruments.Lute: DnDItemObject("Lute", DnDItemType.Instrument, "35 gp", "2 lb.", ""),
+    DnDMusicalInstruments.Lyre: DnDItemObject("Lyre", DnDItemType.Instrument, "30 gp", "2 lb.", ""),
+    DnDMusicalInstruments.Horn: DnDItemObject("Horn", DnDItemType.Instrument, "3 gp", "2 lb.", ""),
+    DnDMusicalInstruments.Pan_flute: DnDItemObject("Pan flute", DnDItemType.Instrument, "12 gp", "2 lb.", ""),
+    DnDMusicalInstruments.Shawm: DnDItemObject("Shawm", DnDItemType.Instrument, "2 gp", "1 lb.", ""),
+    DnDMusicalInstruments.Viol: DnDItemObject("Viol", DnDItemType.Instrument, "30 gp", "1 lb.", ""),
+}
 
 class DnDContainer(Enum):
     Backpack = auto()
