@@ -299,3 +299,13 @@ class DnDItems(Enum):
     Amulet = auto()
     Emblem = auto()
     Reliquary = auto()
+
+
+class DnDAmmunition(Enum):
+    Arrows = auto()
+    Blowgun_Needles = auto()
+    Crossbow_Bolts = auto()
+    Sling_Bullets = auto()
+
+
+
