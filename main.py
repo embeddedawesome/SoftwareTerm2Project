@@ -32,13 +32,13 @@ def createcharacter():
             weapon1 = make_decision("Select primary weapon", DnDMartialWeapons)
             weapon2 = make_decision("Select secondary weapon", DnDSimpleWeapons)
             if weapon2 == DnDSimpleWeapons.Handaxe:
-                character.weapons += [DnDSimpleWeapons.Handaxe]
+                weapon2 = (DnDSimpleWeapons.Handaxe, 2)
             character.inventory += [DnDEquipmentPacks.Explorers_Pack]
-            character.weapons += [weapon1, weapon2, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin, DnDSimpleWeapons.Javelin]
+            character.weapons += [weapon1, weapon2, (DnDSimpleWeapons.Javelin, 4)]
         case DnDClass.Bard:
             weapon = make_decision("Select primary weapon", [DnDMartialWeapons.Rapier, DnDMartialWeapons.Longsword, DnDSimpleWeapons])
             pack = make_decision("Select a pack", [DnDEquipmentPacks.Diplomats_Pack, DnDEquipmentPacks.Entertainers_Pack])
-            instrument = make_decision("Select an instrument", ["Lute", "Other musical instrument"])
+            instrument = make_decision("Select an instrument", [DnDMusicalInstruments])
             character.inventory += [DnDLightArmour.Leather_armour, pack, instrument]
             character.weapons += [weapon, DnDSimpleWeapons.Dagger]
         case DnDClass.Cleric:
@@ -54,15 +54,14 @@ def createcharacter():
         case DnDClass.Druid:
             weapon1 = make_decision("Select primary weapon", [DnDMartialWeapons.Scimitar, DnDSimpleWeapons])
             weapon2 = make_decision("Select secondary weapon", [DnDShields.Shield, DnDSimpleWeapons])
-            character.inventory += [DnDLightArmour.Leather_armour, DnDEquipmentPacks.Explorers_Pack, *[item for item in DnDItem if dnd_items[item].item_type == DnDItemType.Druidic_Focus]]
+            character.inventory += [DnDLightArmour.Leather_armour, DnDEquipmentPacks.Explorers_Pack, DnDDruidicFocus]
             character.weapons += [weapon1, weapon2]
-        case DnDClass.Fighter:
             
         case DnDClass.Wizard:
             weapon = make_decision("Select a weapon", [DnDSimpleWeapons.Quarterstaff, DnDSimpleWeapons.Dagger])
-            magic_item = make_decision("Select a magic item", [DnDItem.Component_Pouch, *[item for item in DnDItem if dnd_items[item].item_type == DnDItemType.Arcane_Focus] ])
+            magic_item = make_decision("Select a magic item", [DnDCommonItems.Component_Pouch, DnDArcaneFocus ])
             pack = make_decision("Select a pack", [DnDEquipmentPacks.Scholars_Pack, DnDEquipmentPacks.Explorers_Pack])
-            character.inventory += [DnDItem.Spellbook, magic_item, pack]
+            character.inventory += [DnDCommonItems.Spellbook, magic_item, pack]
             character.weapons += [weapon]
 
     return character
@@ -96,18 +95,21 @@ def viewcharacter(character):
 def make_decision(question, constraints):
     # Generate the option list
     options = []
-    if isinstance(constraints, enum.EnumType):
-        options += [(i.name.replace("_", " "), i) for i in constraints]
-    elif isinstance(constraints, list):
-        # If the constraint is a list of entries, iterate through each entry
-        for i in constraints:
-            # If the entry is a value of an Enum class, we print its name
-            if isinstance(constraints[i], enum.Enum):
-                options += [(constraints[i].name.replace("_", " "), constraints[i])]
-            if isinstance(constraints[i], enum.EnumType):
-                options += [(j.name.replace("_", " "), j) for j in constraints[i]]
-            else:
-                options += [(constraints[i], constraints[i])]
+
+    # Make sure constraints is a list
+    constraints = [constraints] if not isinstance(constraints, list) else constraints
+
+    # Iterate through the constraints and generate tuples of printable names and values
+    for i in constraints:
+        # If constraint is a value of an Enum class, we print its name
+        if isinstance(i, enum.Enum):
+            options += [(i.name.replace("_", " "), i)]
+        # If constraint is an Enum class we process all values
+        elif isinstance(i, enum.EnumType):
+            options += [(j.name.replace("_", " "), j) for j in i]
+        # Otherwise we treat the constraint as a string
+        else:
+            options += [(i, i)]
 
     # Keep asking question while we don't have an acceptable answer
     while True:
@@ -122,8 +124,10 @@ def make_decision(question, constraints):
         answer = input()
 
         # Validate input as per constraints
+        # First check if answer is a number matching to one of the answers
         if answer.isdigit() and int(answer) < len(options):
             return options[int(answer)][1]
+        # Otherwise compare the answer to each name
         else:
             for o in options:
                 if answer.lower() == o[0].lower():
