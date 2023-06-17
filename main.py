@@ -83,18 +83,17 @@ def viewcharacter(character):
 def make_decision(question, constraints):
     # Generate the option list
     options = []
-    if isinstance(constraints, enum.EnumType):
-        options += [(i.name.replace("_", " "), i) for i in constraints]
-    elif isinstance(constraints, list):
-        # If the constraint is a list of entries, iterate through each entry
-        for i in constraints:
-            # If the entry is a value of an Enum class, we print its name
-            if isinstance(i, enum.Enum):
-                options += [(make_string(i), i)]
-            elif isinstance(i, enum.EnumType):
-                options += [(make_string(j), j) for j in i]
-            else:
-                options += [(i, i)]
+    # Make sure constraints is a list
+    constraints = [constraints] if not isinstance(constraints, list) else constraints
+
+    # Iterate through the constraints and generate tuples of printable names and values
+    for i in constraints:
+        # If constraint is an Enum class we process all values
+        if isinstance(i, enum.EnumType):
+            options += [(make_string(j), j) for j in i]
+        # Otherwise we treat the constraint as a string
+        else:
+            options += [(make_string(i), i)]
 
     # Keep asking question while we don't have an acceptable answer
     while True:
@@ -115,6 +114,7 @@ def make_decision(question, constraints):
             for o in options:
                 if answer.lower() == o[0].lower():
                     return o[1]
+
 
 # Run Project
 #All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use.
