@@ -3,6 +3,8 @@
 
 import enum
 from DnDCharacter import *
+from DnDCharacterDatabase import *
+
 
 # initialise variables
 
@@ -282,14 +284,20 @@ def make_decision(question, constraints):
 # Run Project
 #All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use.
 if __name__ == "__main__":
-    character = None
+    db = DnDCharacterDatabase("characters.pickle")
     while True:
-        action = input("Create, View, Edit, or Reset? ")
+        action = input("Create, View, Edit, Save, or Reset? ")
         match action.lower()[0]:
             case'c':
-                character = createcharacter()
+                db.characters.append(createcharacter())
             case'v':
-                viewcharacter(character)
+                for character in db.characters:
+                    print("------------- Character Sheet ------------")
+                    viewcharacter(character)
+                    print("------------------------------------------")
             case'r':
-                character.reset()
+                db.reset()
                 print("Character Reset")
+            case 's':
+                db.save()
+                print("Characters saved")
